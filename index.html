@@ -1,0 +1,1145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phuket Optional Tours 2026 | ITC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #10213f;
+      --muted: #5b6475;
+      --line: #d8e0ea;
+      --sea: #017c96;
+      --coral: #e7352f;
+      --sun: #f6c557;
+      --mint: #e6f4ee;
+      --paper: #fbfaf7;
+      --white: #ffffff;
+      --shadow: 0 18px 44px rgba(16, 33, 63, .14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.45;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      min-height: 92vh;
+      min-height: 92svh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      background:
+        linear-gradient(100deg, rgba(9, 24, 48, .82), rgba(9, 24, 48, .42) 55%, rgba(9, 24, 48, .18)),
+        url("assets/phi-phi.png") center / cover;
+      color: var(--white);
+      padding: 22px clamp(18px, 4vw, 56px) 32px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .logo {
+      width: 104px;
+      padding: 8px;
+      background: var(--white);
+      border-radius: 6px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: rgba(255, 255, 255, .86);
+      font-size: 14px;
+      font-weight: 750;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .topbar .eyebrow {
+      justify-self: end;
+      text-align: right;
+    }
+
+    .hero-copy {
+      align-self: center;
+      width: 100%;
+      max-width: 760px;
+      padding-block: 46px;
+    }
+
+    h1 {
+      margin: 10px 0 18px;
+      font-size: clamp(44px, 8vw, 86px);
+      line-height: .96;
+      letter-spacing: 0;
+      max-width: 11ch;
+    }
+
+    .lead {
+      width: 100%;
+      max-width: 650px;
+      margin: 0 0 26px;
+      color: rgba(255, 255, 255, .92);
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 520;
+      overflow-wrap: anywhere;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-weight: 800;
+      background: var(--sun);
+      color: #14213d;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .22);
+    }
+
+    .btn.secondary {
+      color: var(--white);
+      background: rgba(255, 255, 255, .14);
+      border: 1px solid rgba(255, 255, 255, .4);
+      box-shadow: none;
+    }
+
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 980px;
+    }
+
+    .proof {
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, .26);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .12);
+      backdrop-filter: blur(10px);
+    }
+
+    .proof strong {
+      display: block;
+      font-size: 19px;
+    }
+
+    .proof span {
+      color: rgba(255, 255, 255, .78);
+      font-size: 13px;
+    }
+
+    .section {
+      padding: 54px clamp(18px, 5vw, 64px);
+    }
+
+    .section.alt {
+      background: var(--white);
+    }
+
+    .inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      max-width: 430px;
+      color: var(--muted);
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .tour-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .tour-card {
+      display: grid;
+      grid-template-rows: 190px auto;
+      min-height: 100%;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 8px 20px rgba(16, 33, 63, .06);
+    }
+
+    .tour-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .tour-body {
+      padding: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 10px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--mint);
+      color: #116046;
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 23px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .tour-body p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: auto;
+      color: var(--sea);
+      font-weight: 900;
+      font-size: 25px;
+    }
+
+    .price small {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .option-list {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .option-list li {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .option-list b {
+      color: var(--ink);
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .tap-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 16px;
+    }
+
+    .tap-hint img {
+      width: 34px;
+      height: auto;
+    }
+
+    .tap-hint span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .cat-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 18px;
+    }
+
+    .cat-tab {
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .cat-tab.active {
+      border-color: var(--sea);
+      background: var(--sea);
+      color: var(--white);
+    }
+
+    details.tour-detail.is-hidden {
+      display: none;
+    }
+
+    .tour-card.is-hidden {
+      display: none;
+    }
+
+    .tour-img-fallback {
+      height: 190px;
+      display: flex;
+      align-items: flex-end;
+      padding: 14px;
+      color: rgba(255, 255, 255, .92);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .tour-img-fallback.cat-day {
+      background: linear-gradient(135deg, #039bb8, #013b47);
+    }
+
+    .tour-img-fallback.cat-outdoor {
+      background: linear-gradient(135deg, #3d8f5b, #16341f);
+    }
+
+    .tour-img-fallback.cat-spa {
+      background: linear-gradient(135deg, #6fbfa0, #1f5f47);
+    }
+
+    .tour-img-fallback.cat-evening {
+      background: linear-gradient(135deg, var(--ink), var(--coral));
+    }
+
+    .view-details {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--sea);
+    }
+
+    .tour-card {
+      cursor: pointer;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(9, 24, 48, .55);
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 50;
+      padding: 0;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-sheet {
+      background: var(--white);
+      width: 100%;
+      max-width: 560px;
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 16px 16px 0 0;
+      padding: 24px clamp(18px, 4vw, 32px) 28px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+    }
+
+    .modal-close {
+      border: none;
+      background: var(--mint);
+      color: var(--ink);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1;
+      cursor: pointer;
+      flex: none;
+    }
+
+    .modal-price {
+      color: var(--sea);
+      font-weight: 900;
+      font-size: 22px;
+      margin: 8px 0 16px;
+    }
+
+    .modal-sheet ul {
+      margin: 0 0 20px;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .modal-sheet ul li {
+      margin: 8px 0;
+    }
+
+    .booking-form {
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .form-row input,
+    .form-row textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    .form-row input[readonly] {
+      background: var(--mint);
+      color: #116046;
+      font-weight: 800;
+    }
+
+    .contact-box.light {
+      background: var(--mint);
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .contact-box.light span:first-child {
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: none;
+      font-size: 13px;
+    }
+
+    .booking-form .btn {
+      justify-self: start;
+      border: none;
+    }
+
+    details.tour-detail {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 8px 20px rgba(16, 33, 63, .05);
+      overflow: hidden;
+    }
+
+    details.tour-detail summary {
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 16px 18px;
+      font-weight: 900;
+      list-style: none;
+    }
+
+    details.tour-detail summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-meta {
+      color: var(--sea);
+      font-size: 13px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .detail-content {
+      padding: 0 18px 18px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .detail-content p {
+      margin: 0 0 12px;
+    }
+
+    .detail-content ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .detail-content li {
+      margin: 6px 0;
+    }
+
+    .bundle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .panel {
+      border-radius: 8px;
+      padding: 24px;
+      background: var(--ink);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .panel.light {
+      background: var(--mint);
+      color: var(--ink);
+      box-shadow: none;
+      border: 1px solid #c9e8da;
+    }
+
+    .panel h3 {
+      font-size: 28px;
+    }
+
+    .panel ul {
+      margin: 16px 0 0;
+      padding-left: 18px;
+    }
+
+    .panel li {
+      margin: 8px 0;
+    }
+
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 8px 20px rgba(16, 33, 63, .06);
+    }
+
+    .price-table th,
+    .price-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    .price-table th {
+      background: var(--sea);
+      color: var(--white);
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .price-table td:nth-child(2),
+    .price-table td:nth-child(3) {
+      text-align: right;
+      font-weight: 800;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .group-row td {
+      background: #eef6f8;
+      color: var(--sea);
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .booking {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items: center;
+      padding: 28px;
+      border-radius: 8px;
+      background: var(--coral);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .booking h2 {
+      color: var(--white);
+    }
+
+    .booking p {
+      color: rgba(255, 255, 255, .88);
+      margin: 12px 0 0;
+      max-width: 680px;
+    }
+
+    .contact-box {
+      display: grid;
+      gap: 8px;
+      padding: 18px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .14);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .fineprint {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-strip,
+      .tour-grid,
+      .details-grid,
+      .bundle,
+      .booking {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-note {
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 900px) and (min-width: 641px) {
+      .hero-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        min-height: 94vh;
+        min-height: 94svh;
+      }
+
+      .topbar {
+        align-items: start;
+        gap: 12px;
+      }
+
+      .logo {
+        width: 86px;
+      }
+
+      .topbar .eyebrow {
+        display: none;
+      }
+
+      .lead {
+        max-width: min(320px, calc(100vw - 56px));
+        font-size: 17px;
+        line-height: 1.42;
+      }
+
+      .cta-row {
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .price-table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .cat-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .cat-tab {
+        flex: 0 0 auto;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .hero {
+        min-height: 640px;
+      }
+
+      .btn {
+        box-shadow: none;
+      }
+
+      .tour-card,
+      .panel,
+      .booking {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <nav class="topbar" aria-label="Brochure header">
+      <img class="logo" src="assets/itc-logo.png" alt="ITC logo">
+      <p class="eyebrow">Rates valid until 31 Oct 2026</p>
+    </nav>
+    <div class="hero-copy">
+      <p class="eyebrow">Phuket optional tours</p>
+      <h1>Make every free day count.</h1>
+      <p class="lead">Island trips, wildlife, family fun, city tours, spa, and evening shows for guests who want more from Phuket.</p>
+    </div>
+    <div class="hero-strip" aria-label="Booking benefits">
+      <div class="proof"><strong>24h</strong><span>Free cancellation before tour departure</span></div>
+      <div class="proof"><strong>Family</strong><span>Easy choices for couples, groups, and children</span></div>
+      <div class="proof"><strong>Fast</strong><span>Clear prices and booking details in one place</span></div>
+      <div class="proof"><strong>Flexible</strong><span>Ask us to check vegetarian, Jain, or Indian meal requests</span></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section alt" id="top-picks">
+      <div class="inner">
+        <div class="section-head">
+          <h2>All Phuket experiences</h2>
+          <p class="section-note">Browse by category, then tap any tour to see full details and book on WhatsApp.</p>
+        </div>
+        <div class="tap-hint">
+          <img src="assets/tap-hint.gif" alt="Tap gesture animation">
+          <span>Tap any tour card to see full details</span>
+        </div>
+        <div class="cat-tabs" role="tablist" aria-label="Filter tours by category">
+          <button type="button" class="cat-tab active" data-cat="all">All</button>
+          <button type="button" class="cat-tab" data-cat="day">Day Tours</button>
+          <button type="button" class="cat-tab" data-cat="outdoor">Outdoor Activities</button>
+          <button type="button" class="cat-tab" data-cat="spa">Spa</button>
+          <button type="button" class="cat-tab" data-cat="evening">Evening Shows</button>
+        </div>
+        <div class="tour-grid" id="tour-grid"></div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="inner bundle">
+        <div class="panel">
+          <h3>Recommended for Indian guests</h3>
+          <ul>
+            <li>For first-time Phuket visitors: Phi Phi or Phang Nga Bay.</li>
+            <li>For families with children: Khai Islands, Andamanda Water Park, Dolphin Show, or evening shows.</li>
+            <li>For premium nature lovers: Similan or Surin Islands during the open season.</li>
+            <li>For guests avoiding long sea days: City Tour, Spa, Elephant Care, ATV, Zipline, or stage shows.</li>
+          </ul>
+        </div>
+        <div class="panel light">
+          <h3>Before booking</h3>
+          <ul>
+            <li>Share guest names, ages, hotel, travel date, and preferred tour.</li>
+            <li>Ask us to check vegetarian, Jain, Indian meal, or private transfer requests.</li>
+            <li>National park fees and some add-ons may be excluded depending on the tour.</li>
+            <li>Weather and sea conditions may affect island trips.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" id="prices">
+      <div class="inner">
+        <div class="section-head">
+          <h2>Tour price guide</h2>
+          <p class="section-note">Adult and child rates in Thai Baht. O/R means on request. N/A means not available.</p>
+        </div>
+        <table class="price-table">
+          <thead>
+            <tr><th>Tour / Option</th><th>Adult</th><th>Child</th></tr>
+          </thead>
+          <tbody>
+            <tr class="group-row"><td colspan="3">Island tours</td></tr>
+            <tr><td>Phi Phi by Big Boat, excluding national park fee</td><td>1,300</td><td>1,200</td></tr>
+            <tr><td>Phi Phi by Speedboat + Bamboo Island</td><td>2,000</td><td>1,700</td></tr>
+            <tr><td>Phi Phi by Speedboat + Khai Island</td><td>1,700</td><td>1,500</td></tr>
+            <tr><td>Phi Phi by Catamaran + Maiton Island</td><td>3,700</td><td>3,500</td></tr>
+            <tr><td>Phang Nga Bay by Longtail Boat</td><td>1,700</td><td>1,500</td></tr>
+            <tr><td>Phang Nga Bay by Big Boat</td><td>1,700</td><td>1,500</td></tr>
+            <tr><td>Phang Nga Bay by Speedboat</td><td>1,900</td><td>1,700</td></tr>
+            <tr><td>Racha + Coral Island by Speedboat</td><td>1,900</td><td>1,700</td></tr>
+            <tr><td>Coral Island by Speedboat</td><td>2,250</td><td>1,900</td></tr>
+            <tr><td>Khai Islands, half day</td><td>1,050</td><td>900</td></tr>
+            <tr><td>Khai Islands, full day</td><td>1,450</td><td>1,250</td></tr>
+            <tr><td>Similan Islands by Speedboat, 15 Oct - 15 May</td><td>2,700</td><td>2,100</td></tr>
+            <tr><td>Surin Islands by Speedboat, 15 Oct - 15 May</td><td>3,200</td><td>2,600</td></tr>
+            <tr class="group-row"><td colspan="3">Activities and attractions</td></tr>
+            <tr><td>Elephant Sanctuary Village</td><td>1,700</td><td>1,600</td></tr>
+            <tr><td>ATV, 1 hour</td><td>1,300</td><td>1,100</td></tr>
+            <tr><td>ATV, 1.5 hours</td><td>1,500</td><td>1,300</td></tr>
+            <tr><td>ATV, 2 hours</td><td>1,700</td><td>1,500</td></tr>
+            <tr><td>Dolphin Show, regular / deluxe / VIP / VVIP</td><td>650 - 1,100</td><td>500 - 750</td></tr>
+            <tr><td>Andamanda Water Park ticket only</td><td>1,150</td><td>850</td></tr>
+            <tr><td>Andamanda + round-trip transfer</td><td>1,550</td><td>1,250</td></tr>
+            <tr class="group-row"><td colspan="3">Evening shows</td></tr>
+            <tr><td>Simon Cabaret, regular / VIP seat</td><td>650 - 750</td><td>650 - 750</td></tr>
+            <tr><td>Phuket FantaSea show only</td><td>1,700</td><td>1,700</td></tr>
+            <tr><td>Phuket FantaSea with buffet dinner</td><td>1,900</td><td>1,750</td></tr>
+            <tr><td>Carnival Magic show only</td><td>1,800</td><td>1,800</td></tr>
+            <tr><td>Carnival Magic with buffet dinner</td><td>2,000</td><td>1,900</td></tr>
+            <tr><td>Siam Niramit, silver / gold / platinum</td><td>1,000 - 1,200</td><td>900 - 1,100</td></tr>
+            <tr><td>Phuket Circus, silver to diamond</td><td>900 - 2,950</td><td>700 - 2,950</td></tr>
+          </tbody>
+        </table>
+        <p class="fineprint">Rates are based on the supplied July 2026 price list. Terms and conditions apply. Participant details are required on booking.</p>
+      </div>
+    </section>
+
+    <section class="section alt" id="book">
+      <div class="inner">
+        <div class="section-head">
+          <h2>Ready to reserve?</h2>
+          <p class="section-note">Tell us your preferred tour, travel date, hotel, and group size. We will confirm availability and the final price before booking.</p>
+        </div>
+        <form class="booking-form" id="booking-form">
+          <div class="form-row">
+            <label for="pref-tour">Preferred tour</label>
+            <input type="text" id="pref-tour" name="tour" readonly placeholder="Tap “Book on WhatsApp” on any tour above">
+          </div>
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="travel-date">Travel date</label>
+              <input type="date" id="travel-date">
+            </div>
+            <div class="form-row">
+              <label for="hotel-name">Hotel name</label>
+              <input type="text" id="hotel-name" placeholder="e.g. Patong Beach Hotel">
+            </div>
+            <div class="form-row">
+              <label for="pax-adults">Adults</label>
+              <input type="number" id="pax-adults" min="0" value="2">
+            </div>
+            <div class="form-row">
+              <label for="pax-children">Children</label>
+              <input type="number" id="pax-children" min="0" value="0">
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="requests">Food / transfer requests</label>
+            <textarea id="requests" rows="3" placeholder="e.g. vegetarian meal, hotel pickup time"></textarea>
+          </div>
+          <button type="button" class="btn" id="send-whatsapp">Send via WhatsApp</button>
+        </form>
+        <div class="contact-box light" aria-label="WhatsApp contacts" style="margin-top:24px;max-width:420px;">
+          <span>Or message our team directly:</span>
+          <span>WhatsApp: +66 89 866 1400</span>
+          <span>WhatsApp: +66 89 967 3600</span>
+          <span>WhatsApp: +66 80 684 7648</span>
+          <span>WhatsApp: +66 81 956 2591</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-sheet" id="modal-sheet">
+      <div class="modal-head">
+        <h3 id="modal-title" style="margin:0;"></h3>
+        <button type="button" class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-price" id="modal-price"></div>
+      <p id="modal-desc" style="color:var(--muted);font-size:15px;"></p>
+      <ul id="modal-highlights"></ul>
+      <button type="button" class="btn" id="modal-book">Book on WhatsApp</button>
+    </div>
+  </div>
+
+  <script>
+    var tours = [
+      { id: "phiphi", cat: "day", tag: "Iconic island day", img: "assets/phi-phi.png",
+        title: "Phi Phi Islands", price: "from THB 1,300",
+        desc: "Maya Bay, Pileh Lagoon, Viking Cave, snorkeling, beach time, and island scenery.",
+        options: [["Big Boat","1,300"],["Speedboat + Khai Island","1,700"],["Speedboat + Bamboo Island","2,000"],["Catamaran + Maiton Island","3,700"]],
+        highlights: ["Maya Bay, Pileh Lagoon, Viking Cave, Monkey Beach, and Phi Phi Don depending on route.","Options by big boat, speedboat, or catamaran with Khai, Bamboo, or Maiton add-ons.","Good for first-time visitors, couples, friends, and families who want a full island day."] },
+      { id: "phangnga", cat: "day", tag: "Scenic classic", img: "assets/phang-nga.png",
+        title: "Phang Nga Bay", price: "from THB 1,700",
+        desc: "James Bond Island, sea-cave kayaking, limestone cliffs, and floating village scenery.",
+        options: [["Longtail Boat","1,700"],["Big Boat","1,700"],["Speedboat","1,900"],["Luxury Yacht","On request"]],
+        highlights: ["James Bond Island, sea-cave kayaking, Koh Panyee floating village, mangroves, and panoramic cruising.","Choose longtail boat for an authentic feel, big boat for comfort, speedboat for a faster day, or luxury yacht on request.","A strong choice for families and mixed-age groups because it is less swimming focused than Phi Phi."] },
+      { id: "racha", cat: "day", tag: "Clear-water escape", img: null,
+        title: "Racha + Coral Island", price: "from THB 1,900",
+        desc: "A clear-water island escape with beach time, snorkeling, and optional activities.",
+        options: [["Racha + Coral, speedboat","1,900"],["Coral Island only","2,250"]],
+        highlights: ["Racha Island is known for powdery sand, turquoise water, and snorkeling near Patok or Siam Bay.","Coral Island can include optional parasailing, banana boat, kayaking, or relaxed beach leisure.","Good for guests who want a full day without a very long transfer."] },
+      { id: "khai", cat: "day", tag: "Easy nearby islands", img: null,
+        title: "Coral Island / Khai Islands", price: "from THB 1,050",
+        desc: "Easy nearby island options for a shorter, lighter tropical day with swimming and snorkeling.",
+        options: [["Khai Islands, half day","1,050"],["Khai Islands, full day","1,450"]],
+        highlights: ["Coral Island suits guests who want beach relaxation plus optional water sports.","Khai Islands are easy for families and first-time snorkelers, with shallow, calm water.","Useful when guests have limited free time."] },
+      { id: "similan", cat: "day", tag: "Premium nature", img: null,
+        title: "Similan Islands", price: "from THB 2,700",
+        desc: "A seasonal marine-park trip for premium nature, white sand, and some of Thailand's clearest water.",
+        options: [["Similan Islands, speedboat","2,700"],["Season","15 Oct - 15 May"]],
+        highlights: ["Highlights can include Sail Rock viewpoint, multiple islands, beach time, and snorkeling.","Best for ocean lovers and guests who do not mind a longer travel day.","Seasonal operation: 15 October to 15 May."] },
+      { id: "surin", cat: "day", tag: "Quiet nature", img: "assets/surin.png",
+        title: "Surin Islands", price: "from THB 3,200",
+        desc: "A nature-focused island trip with healthy reefs, clear shallow snorkeling, and a quiet atmosphere.",
+        options: [["Surin Islands, speedboat","3,200"],["Season","15 Oct - 15 May"]],
+        highlights: ["Common highlights include several snorkeling stops, quiet beaches, and the Moken sea gypsy village.","Good for guests who prefer a less crowded marine experience.","Seasonal operation: 15 October to 15 May."] },
+      { id: "citytour", cat: "day", tag: "Culture & photos", img: "assets/city-tour.png",
+        title: "Phuket City Tour", price: "On request",
+        desc: "Big Buddha, Wat Chalong, Old Town, viewpoints, local shopping, and island culture.",
+        options: [],
+        highlights: ["Common stops include Big Buddha, Wat Chalong, Phuket Old Town, Karon Viewpoint, local shops, and markets.","Good for arrival or departure days, non-swimmers, seniors, and mixed-age groups.","Route, duration, guide language, and vehicle can be customized on request."] },
+      { id: "elephant", cat: "outdoor", tag: "Gentle wildlife", img: "assets/elephant.png",
+        title: "Elephant Care", price: "from THB 1,700",
+        desc: "Feed, walk with, and learn about rescued elephants in a sanctuary environment.",
+        options: [],
+        highlights: ["Guests may prepare food, feed elephants, walk with them, and join mud spa or bathing activities.","Good for families, animal lovers, and guests who want an emotional, photo-friendly experience.","Ask us to confirm the exact activity style and ethical policy for the selected operator."] },
+      { id: "atv", cat: "outdoor", tag: "Off-road adventure", img: null,
+        title: "ATV Adventure", price: "from THB 1,300",
+        desc: "An off-road ride through jungle trails, hills, rubber plantations, and viewpoints.",
+        options: [["1 hour","1,300"],["1.5 hours","1,500"],["2 hours","1,700"]],
+        highlights: ["Includes safety briefing, equipment, and professional guidance.","Can sometimes be combined with elephant care, zipline, or viewpoint programs.","Suitable for beginners and experienced riders."] },
+      { id: "dolphin", cat: "outdoor", tag: "Family favorite", img: null,
+        title: "Dolphin Show", price: "from THB 650",
+        desc: "A family-friendly indoor show with trained dolphins, music, lighting, and acrobatics.",
+        options: [["Regular","650"],["Deluxe","800"],["VIP","950"],["VVIP","1,100"]],
+        highlights: ["Photo opportunities or swimming with dolphins may be available at extra charge.","Good for families with children or guests who want a lighter activity.","Comfortable indoor seating with multiple showtimes."] },
+      { id: "tiger", cat: "outdoor", tag: "Wildlife photo", img: null,
+        title: "Tiger Kingdom / Tiger Park", price: "from THB 970",
+        desc: "A guided tiger encounter where guests can observe and take photos under staff supervision.",
+        options: [],
+        highlights: ["Ticket options depend on tiger size and interaction level.","Private round-trip van transfer can be arranged.","Best for guests who specifically want a wildlife-photo experience."] },
+      { id: "zipline", cat: "outdoor", tag: "Jungle adventure", img: "assets/zipline.png",
+        title: "Zipline", price: "from THB 1,300",
+        desc: "Jungle platforms, sky bridges, canopy walks, and scenic views depending on the course.",
+        options: [],
+        highlights: ["Hanuman World focuses on immersive rainforest scenery with multiple platform options.","Erawan Patong Seaview combines jungle activity with coastal views and ATV combo options.","Good for adventure-seeking guests and families with older children."] },
+      { id: "andamanda", cat: "outdoor", tag: "Full-day water park", img: null,
+        title: "Andamanda Water Park", price: "from THB 1,150",
+        desc: "A Thai-themed water park with slides, wave pool, lazy river, and family zones.",
+        options: [["Ticket only","1,150"],["Ticket + round-trip transfer","1,550"]],
+        highlights: ["Good for families, teenagers, and guests who want a full leisure day.","Works well when weather or sea conditions make island trips less appealing.","Dining areas and cabana options available."] },
+      { id: "spa", cat: "spa", tag: "Relax & unwind", img: null,
+        title: "Spa & Massage", price: "On request",
+        desc: "A relaxation option after sightseeing, island tours, shopping days, or long travel.",
+        options: [],
+        highlights: ["Options may include Thai massage, aromatherapy, foot massage, body scrub, and spa packages.","Good for couples, seniors, and guests who want a calm half-day activity.","Ask us to match location, treatment style, budget, and transfer needs."] },
+      { id: "simon", cat: "evening", tag: "Cabaret night", img: null,
+        title: "Simon Cabaret", price: "from THB 650",
+        desc: "A glamorous evening show in Patong with costumes, music, dancing, and stage production.",
+        options: [["Regular seat","650"],["VIP seat","750"]],
+        highlights: ["Round-trip shared transfer can be added.","Good for guests wanting a short, easy nightlife experience.","Regular and VIP seat options are available."] },
+      { id: "fantasea", cat: "evening", tag: "Cultural spectacle", img: null,
+        title: "Phuket FantaSea", price: "from THB 1,700",
+        desc: "A large cultural night attraction mixing Thai mythology, stage effects, acrobatics, and dining.",
+        options: [["Show only","1,700"],["Show + buffet dinner","1,900"]],
+        highlights: ["Gold seat upgrade and shared transfer are available.","Good for families and guests who want a complete evening program.","Festival village with shopping, games, and cultural activities."] },
+      { id: "carnival", cat: "evening", tag: "Evening theme park", img: null,
+        title: "Carnival Magic", price: "from THB 1,800",
+        desc: "A colorful evening theme park with lights, fantasy zones, photo spots, and a grand parade.",
+        options: [["Show only","1,800"],["Show + buffet dinner","2,000"]],
+        highlights: ["Royal seat, tram upgrade, and shared transfer can be added.","Strong choice for families, groups, and guests who enjoy large visual productions.","Nighttime parade with illuminated floats and performances."] },
+      { id: "siamniramit", cat: "evening", tag: "Stage & acrobatics", img: null,
+        title: "Siam Niramit / Phuket Circus", price: "from THB 900",
+        desc: "Evening entertainment for guests who want culture, stage performance, or acrobatics.",
+        options: [["Siam Niramit, from","1,000"],["Phuket Circus, from","900"]],
+        highlights: ["Siam Niramit focuses on Thai history, spiritual beliefs, festivals, and optional buffet dinner.","Phuket Circus offers acrobatics, aerial acts, stunts, and family-friendly entertainment.","Seat categories and transfer options vary by show."] }
+    ];
+
+    var catFallbackLabel = { day: "Day tour", outdoor: "Outdoor activity", spa: "Spa", evening: "Evening show" };
+
+    function cardHtml(t) {
+      var media = t.img
+        ? '<img src="' + t.img + '" alt="' + t.title + '">'
+        : '<div class="tour-img-fallback cat-' + t.cat + '">' + catFallbackLabel[t.cat] + '</div>';
+      var optionsHtml = "";
+      if (t.options.length) {
+        optionsHtml = '<ul class="option-list">' + t.options.map(function (o) {
+          return '<li><span>' + o[0] + '</span><b>' + o[1] + '</b></li>';
+        }).join("") + '</ul>';
+      }
+      var isFrom = /^from /.test(t.price);
+      var priceLabel = isFrom ? "from" : "price";
+      var priceValue = isFrom ? t.price.replace(/^from /, "") : t.price;
+      return '<article class="tour-card" data-cat="' + t.cat + '" data-id="' + t.id + '">' +
+        media +
+        '<div class="tour-body">' +
+          '<span class="tag">' + t.tag + '</span>' +
+          '<h3>' + t.title + '</h3>' +
+          '<p>' + t.desc + '</p>' +
+          '<div class="price"><small>' + priceLabel + '</small> ' + priceValue + '</div>' +
+          optionsHtml +
+          '<span class="view-details">View details &rarr;</span>' +
+        '</div>' +
+      '</article>';
+    }
+
+    var grid = document.getElementById("tour-grid");
+    grid.innerHTML = tours.map(cardHtml).join("");
+
+    var tabs = document.querySelectorAll(".cat-tab");
+    var cards = document.querySelectorAll(".tour-card");
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        tabs.forEach(function (t) { t.classList.remove("active"); });
+        tab.classList.add("active");
+        var cat = tab.getAttribute("data-cat");
+        cards.forEach(function (card) {
+          var show = cat === "all" || card.getAttribute("data-cat") === cat;
+          card.classList.toggle("is-hidden", !show);
+        });
+      });
+    });
+
+    var overlay = document.getElementById("modal-overlay");
+    var modalTitle = document.getElementById("modal-title");
+    var modalPrice = document.getElementById("modal-price");
+    var modalDesc = document.getElementById("modal-desc");
+    var modalHighlights = document.getElementById("modal-highlights");
+    var modalBook = document.getElementById("modal-book");
+    var currentTour = null;
+
+    function openModal(tour) {
+      currentTour = tour;
+      modalTitle.textContent = tour.title;
+      modalPrice.textContent = tour.price;
+      modalDesc.textContent = tour.desc;
+      modalHighlights.innerHTML = tour.highlights.map(function (h) { return "<li>" + h + "</li>"; }).join("");
+      overlay.classList.add("open");
+    }
+
+    function closeModal() {
+      overlay.classList.remove("open");
+    }
+
+    grid.addEventListener("click", function (e) {
+      var card = e.target.closest(".tour-card");
+      if (!card) return;
+      var tour = tours.find(function (t) { return t.id === card.getAttribute("data-id"); });
+      if (tour) openModal(tour);
+    });
+
+    document.getElementById("modal-close").addEventListener("click", closeModal);
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeModal();
+    });
+
+    modalBook.addEventListener("click", function () {
+      if (!currentTour) return;
+      document.getElementById("pref-tour").value = currentTour.title;
+      closeModal();
+      document.getElementById("book").scrollIntoView({ behavior: "smooth" });
+      setTimeout(function () {
+        document.getElementById("travel-date").focus();
+      }, 500);
+    });
+
+    document.getElementById("send-whatsapp").addEventListener("click", function () {
+      var tour = document.getElementById("pref-tour").value || "Not selected yet";
+      var date = document.getElementById("travel-date").value || "Not specified";
+      var hotel = document.getElementById("hotel-name").value || "Not specified";
+      var adults = document.getElementById("pax-adults").value || "0";
+      var children = document.getElementById("pax-children").value || "0";
+      var requests = document.getElementById("requests").value || "None";
+
+      var message = "Hi ITC, I would like to check availability and price.\\n" +
+        "Preferred tour: " + tour + "\\n" +
+        "Travel date: " + date + "\\n" +
+        "Hotel name: " + hotel + "\\n" +
+        "Adults: " + adults + "\\n" +
+        "Children: " + children + "\\n" +
+        "Requests: " + requests;
+
+      var url = "https://wa.me/66898661400?text=" + encodeURIComponent(message);
+      window.open(url, "_blank");
+    });
+  </script>
+</body>
+</html>
