@@ -1111,7 +1111,7 @@
   <script>
     // options format: [label, adultPrice, childPrice]  (childPrice omitted or "" if none / on request)
     var tours = [
-      { id: "phiphi", cat: "day", tag: "Iconic island day", img: "assets/phi-phi.png", feeTag: { label: "Excl. National Park fees", type: "excl" },
+      { id: "phiphi", cat: "day", tag: "", img: "assets/phi-phi.png", feeTag: { label: "Excl. National Park fees", type: "excl" },
         title: "Phi Phi Islands Economy Class Cruise (not include Maya Bay)", price: "THB 1,300",
         desc: "Maya Bay, Pileh Lagoon, Viking Cave, snorkeling, beach time, and island scenery.",
         options: [
@@ -1123,7 +1123,7 @@
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
         notes: ["The Big Boat option does not include Maya Bay","Not suitable for pregnant guests or those with back, mobility, or heart conditions","Maya Bay is closed 1 August-30 September every year","Free cancellation with 24 hours notice"] },
 
-      { id: "phiphispeed", cat: "day", tag: "Speedboat adventure", img: "assets/phiphi-maya.png", feeTag: { label: "Incl. National Park fees", type: "incl" },
+      { id: "phiphispeed", cat: "day", tag: "", img: "assets/phiphi-maya.png", feeTag: { label: "Incl. National Park fees", type: "incl" },
         title: "Phi Phi Islands by Speed Boat", price: "from THB 1,700",
         desc: "Embark on a speedboat adventure from Phuket to explore the Phi Phi Islands and Maya Bay. Snorkel, relax, and enjoy a delicious lunch amidst stunning tropical scenery.",
         options: [
@@ -1136,7 +1136,7 @@
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
         notes: ["Not suitable for: pregnant women, people with back problems, people with mobility impairments, people with heart problems, or wheelchair users","Not allowed: pets, luggage or large bags, drones, unaccompanied minors","The tour may be cancelled due to bad weather conditions, but can be rescheduled","Children must be accompanied by an adult","The boat is not wheelchair accessible","Maya Bay is closed 1 August - 30 September every year"] },
 
-      { id: "phangnga", cat: "day", tag: "Scenic classic", img: "assets/phang-nga.png", feeTag: { label: "Incl. National Park fees", type: "incl" },
+      { id: "phangnga", cat: "day", tag: "", img: "assets/phang-nga.png", feeTag: { label: "Incl. National Park fees", type: "incl" },
         title: "A Canoeing Journey in Phang Nga Bay", price: "from THB 1,700",
         desc: "This tour is the ultimate combination of adventure, nature, and iconic sights, a must-do experience in Phang Nga Bay!",
         options: [
@@ -1172,7 +1172,7 @@
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
         notes: ["Not suitable for: pregnant women, people with back problems, people with mobility impairments, people with heart problems, or wheelchair users"] },
 
-      { id: "racha", cat: "day", tag: "Clear-water escape", img: "assets/racha.jpg", feeTag: { label: "Incl. National Park fees", type: "incl" },
+      { id: "racha", cat: "day", tag: "", img: "assets/racha.jpg", feeTag: { label: "Incl. National Park fees", type: "incl" },
         title: "Racha + Coral Islands One Day Trip", price: "THB 1,900",
         desc: "A clear-water island escape combining Racha Yai and Coral Island in one day.",
         options: [["Racha + Coral Island, speedboat","1,900","1,700"]],
@@ -1181,7 +1181,7 @@
         excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         notes: ["The program is subject to change depending on the tide and weather conditions on the day"] },
 
-      { id: "coral", cat: "day", tag: "Snorkeling & banana beach", img: "assets/coral.jpg",
+      { id: "coral", cat: "day", tag: "", img: "assets/coral.jpg",
         title: "Coral Islands One Day Trip (Snorkeling-Banana Beach)", price: "THB 2,250",
         desc: "Snorkeling lovers' choice! Explore the vibrant coral reefs and marine life around Koh Hey with premium snorkeling equipment.",
         options: [["Coral Island, speedboat","2,250","1,900"]],
@@ -1190,7 +1190,7 @@
         excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         notes: ["Buffet lunch menu at Hornbill Restaurant, Banana Beach includes: mee hoon khai, fried chicken, vegetable salad, tom yum seafood, green curry tofu with vegetables, stir-fried mixed vegetables, spaghetti with tomato sauce, stir-fried chicken with cashew nut, fish fillet with chili sauce, steamed rice, seasonal fruit, and drinking water.","Age requirement: 4-80 years","Good health condition required","Basic swimming ability required"] },
 
-      { id: "khai", cat: "day", tag: "Easy nearby islands", img: "assets/khai.jpg", feeTag: { label: "Incl. Kai Island entrance fees", type: "incl" },
+      { id: "khai", cat: "day", tag: "", img: "assets/khai.jpg", feeTag: { label: "Incl. Kai Island entrance fees", type: "incl" },
         title: "3 Khai Islands Speed Boat", price: "from THB 1,050",
         desc: "Easy nearby island options for a shorter, lighter tropical day with swimming and snorkeling.",
         options: [
@@ -1203,7 +1203,7 @@
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
         notes: ["Not suitable for: pregnant women, people with back problems, people with mobility impairments, people with heart problems, or wheelchair users"] },
 
-      { id: "similan", cat: "day", tag: "Premium nature", img: "assets/similan.jpg", feeTag: { label: "Incl. National Park fees", type: "incl" },
+      { id: "similan", cat: "day", tag: "", img: "assets/similan.jpg", feeTag: { label: "Incl. National Park fees", type: "incl" },
         title: "Similan Islands by Speedboat", price: "THB 2,700",
         desc: "A seasonal marine-park trip for premium nature, white sand, and some of Thailand's clearest water.",
         options: [["Speedboat, 15 Oct - 15 May","2,700","2,100"]],
@@ -1213,14 +1213,14 @@
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
         notes: ["Seasonal operation: 15 October to 15 May","Not suitable for: pregnant women, people with back problems, people with mobility impairments, people with heart problems, or wheelchair users"] },
 
-      { id: "surin", cat: "day", tag: "Quiet nature", img: "assets/surin.png",feeTag: { label: "Incl. National Park fees", type: "incl" },
+      { id: "surin", cat: "day", tag: "", img: "assets/surin.png",feeTag: { label: "Incl. National Park fees", type: "incl" },
         title: "Surin Islands by Speedboat", price: "THB 3,250",
         desc: "A nature-focused island trip with healthy reefs, clear shallow snorkeling, and a quiet atmosphere.",
         options: [["Speedboat, 15 Oct - 15 May","3,250","2,600"]],
         itinerary: ["07:00 Pick up from your Phuket hotel lobby / Khaolak hotel, arrive at Tablamu Pier","07:30 Check-in at the pier and enjoy a light breakfast (sandwich, fresh fruit juice, tea, and coffee)","07:45 Meet your nature tour guide and get a program briefing, including coral-friendly tour details and safety instructions on board","08:00 Depart for Surin Islands by speedboat","10:00 Arrive at Surin Islands: snorkeling paradise at The Nemo / Pineapple Gulf, or relax at the scenic Twin Beach","11:00 Depart to the Sea Gypsy Moken Village to explore the traditional lifestyle of people living in the sea (entrance may be adjusted according to the national park)","11:45 Buffet lunch on the beach at Mu Koh Surin National Park with fresh tropical fruits and drinks","13:00 Snorkeling at Mae Yai Gulf and The Tao Gulf among beautiful coral reefs","15:00 Depart back from Surin Islands to the private pier","17:30 Van transfer back to your hotel"],
         notes: ["Toddler refers to children aged 1-3 years old (free of charge for diving trips)","Children mean 4-11 years old (not over 120 cm tall)","Adult means 12 years old and over","Pickup and drop-off in Phuket carries an additional charge of 300 baht per person","Meals are subject to change according to park policies","Season: open mid-October to mid-May (closed during monsoon season)","Not recommended for pregnant travelers or guests with severe back conditions"] },
 
-      { id: "citytour", cat: "day", tag: "Culture & photos", img: "assets/city-tour.png",
+      { id: "citytour", cat: "day", tag: "", img: "assets/city-tour.png",
         title: "Phuket City Tour", price: "On request",
         desc: "Big Buddha, Wat Chalong, Old Town, Kata - Karon Viewpoint, local shopping, and island culture.",
         options: [],
@@ -1229,7 +1229,7 @@
         excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         notes: ["Runs about 5 hours, typically starting at 10:00 AM"] },
 
-      { id: "elephant", cat: "outdoor", tag: "Gentle wildlife", img: "assets/elephant.png",
+      { id: "elephant", cat: "outdoor", tag: "", img: "assets/elephant.png",
         title: "Elephant Sanctuary Village", price: "THB 1,580",
         desc: "Feed, walk with, and learn about rescued elephants in a sanctuary environment.",
         options: [["At Elephant Sanctuary Village","1,580","1,470"]],
@@ -1238,7 +1238,7 @@
         bring: ["Hat and sunglasses","Swimsuit, sandals, and towel","Dry clothes (lockers and shower rooms available at the camp)","Cash in Thai Baht for souvenirs"],
         notes: ["What to wear: comfortable clothes, trainers or sneakers","Please avoid strong perfumes, creams, or sprays — elephants are sensitive to strong smells","Rainy season notice: some activities involve getting wet and muddy; bring a raincoat or umbrella if you prefer to stay dry, or purchase a raincoat at the camp for 50 THB each"] },
 
-      { id: "atv", cat: "outdoor", tag: "Off-road adventure", img: "assets/atv.jpg",
+      { id: "atv", cat: "outdoor", tag: "", img: "assets/atv.jpg",
         title: "ATV Adventure", price: "from THB 1,160",
         desc: "An off-road ride through jungle trails, hills, rubber plantations, and viewpoints.",
         options: [
@@ -1249,7 +1249,7 @@
         ],
         highlights: ["Includes safety briefing, equipment, and professional guidance.","Can sometimes be combined with elephant care, zipline, or viewpoint programs.","Suitable for beginners and experienced riders."] },
 
-      { id: "dolphin", cat: "outdoor", tag: "Family favorite", img: "assets/dolphin.jpg",
+      { id: "dolphin", cat: "outdoor", tag: "", img: "assets/dolphin.jpg",
         title: "Dolphin Show", price: "from THB 580",
         desc: "A family-friendly indoor show with trained dolphins, music, lighting, and acrobatics.",
         options: [
@@ -1262,7 +1262,7 @@
         ],
         highlights: ["Photo opportunities or swimming with dolphins may be available at extra charge.","Good for families with children or guests who want a lighter activity.","Comfortable indoor seating with multiple showtimes."] },
 
-      { id: "tiger", cat: "outdoor", tag: "Wildlife photo", img: "assets/tiger.jpg",
+      { id: "tiger", cat: "outdoor", tag: "", img: "assets/tiger.jpg",
         title: "Tiger Kingdom / Tiger Park", price: "from THB 920",
         desc: "A guided tiger encounter where guests can observe and take photos under staff supervision.",
         options: [
@@ -1272,7 +1272,7 @@
         ],
         highlights: ["Ticket options depend on tiger size and interaction level.","Private round-trip van transfer can be arranged.","Best for guests who specifically want a wildlife-photo experience."] },
 
-      { id: "zipline", cat: "outdoor", tag: "Jungle adventure", img: "assets/zipline.png",
+      { id: "zipline", cat: "outdoor", tag: "", img: "assets/zipline.png",
         title: "Hanuman World Phuket (incl. Round Trip Shared Transfer)", price: "from THB 1,210",
         desc: "Jungle platforms, sky bridges, and canopy walks through immersive rainforest scenery.",
         options: [
@@ -1285,7 +1285,7 @@
         ],
         highlights: ["Focuses on immersive rainforest scenery with multiple platform options.","Round-trip shared transfer included.","Good for adventure-seeking guests and families with older children."] },
 
-      { id: "erawan", cat: "outdoor", tag: "Jungle adventure", img: "assets/erawan.png",
+      { id: "erawan", cat: "outdoor", tag: "", img: "assets/erawan.png",
         title: "Erawan Patong Seaview Zipline (incl. Round Trip Shared Transfer)", price: "from THB 1,340",
         desc: "Jungle zipline combined with panoramic Patong coastal views, with optional ATV combo packages.",
         options: [
@@ -1300,7 +1300,7 @@
         ],
         highlights: ["Combines jungle activity with coastal views and ATV combo options.","Round-trip shared transfer included.","Good for adventure-seeking guests and families with older children."] },
 
-      { id: "andamanda", cat: "outdoor", tag: "Full-day water park", img: "assets/andamanda.jpg",
+      { id: "andamanda", cat: "outdoor", tag: "", img: "assets/andamanda.jpg",
         title: "Andamanda Water Park", price: "from THB 1,050",
         desc: "A Thai-themed water park with slides, wave pool, lazy river, and family zones.",
         options: [
@@ -1309,13 +1309,13 @@
         ],
         highlights: ["Good for families, teenagers, and guests who want a full leisure day.","Works well when weather or sea conditions make island trips less appealing.","Dining areas and cabana options available."] },
 
-      { id: "spa", cat: "spa", tag: "Relax & unwind", img: "assets/spa.jpg",
+      { id: "spa", cat: "spa", tag: "", img: "assets/spa.jpg",
         title: "Spa & Massage", price: "On request",
         desc: "A relaxation option after sightseeing, island tours, shopping days, or long travel.",
         options: [],
         highlights: ["Options may include Thai massage, aromatherapy, foot massage, body scrub, and spa packages.","Good for couples, seniors, and guests who want a calm half-day activity.","Ask us to match location, treatment style, budget, and transfer needs."] },
 
-      { id: "simon", cat: "evening", tag: "Cabaret night", img: "assets/simon.jpg",
+      { id: "simon", cat: "evening", tag: "", img: "assets/simon.jpg",
         title: "Simon Cabaret", price: "from THB 580",
         desc: "A glamorous evening show in Patong with costumes, music, dancing, and stage production.",
         options: [
@@ -1325,7 +1325,7 @@
         ],
         highlights: ["Round-trip shared transfer can be added.","Good for guests wanting a short, easy nightlife experience.","Regular and VIP seat options are available."] },
 
-      { id: "fantasea", cat: "evening", tag: "Cultural spectacle", img: "assets/fantasea.jpg",
+      { id: "fantasea", cat: "evening", tag: "", img: "assets/fantasea.jpg",
         title: "Phuket FantaSea", price: "from THB 1,680",
         desc: "A large cultural night attraction mixing Thai mythology, stage effects, acrobatics, and dining.",
         options: [
@@ -1336,7 +1336,7 @@
         ],
         highlights: ["Gold seat upgrade and shared transfer are available.","Good for families and guests who want a complete evening program.","Festival village with shopping, games, and cultural activities."] },
 
-      { id: "carnival", cat: "evening", tag: "Evening theme park", img: "assets/carnival.jpg",
+      { id: "carnival", cat: "evening", tag: "", img: "assets/carnival.jpg",
         title: "Carnival Magic", price: "from THB 1,790",
         desc: "A colorful evening theme park with lights, fantasy zones, photo spots, and a grand parade.",
         options: [
@@ -1348,7 +1348,7 @@
         ],
         highlights: ["Royal seat, tram upgrade, and shared transfer can be added.","Strong choice for families, groups, and guests who enjoy large visual productions.","Nighttime parade with illuminated floats and performances."] },
 
-      { id: "siamniramit", cat: "evening", tag: "Stage & acrobatics", img: "assets/siamniramit.jpg",
+      { id: "siamniramit", cat: "evening", tag: "", img: "assets/siamniramit.jpg",
         title: "Siam Niramit", price: "from THB 950",
         desc: "A grand theatrical show showcasing Thai history, mythology, and traditional festivals.",
         options: [
@@ -1360,7 +1360,7 @@
         ],
         highlights: ["Grand theatrical show with over 100 performers, dazzling costumes, and special effects.","Three-act performance showcasing Thai history, spiritual beliefs, and festivals.","Authentic Thai Village with crafts, dances, and cultural demonstrations."] },
 
-      { id: "circus", cat: "evening", tag: "Acrobatics & stunts", img: "assets/circus.jpg",
+      { id: "circus", cat: "evening", tag: "", img: "assets/circus.jpg",
         title: "Adrenaline Rush Show by Phuket Circus", price: "from THB 810",
         desc: "A high-energy evening of acrobatics, aerial stunts, and captivating stage acts.",
         options: [
@@ -1401,7 +1401,7 @@
       return '<article class="tour-card" data-cat="' + t.cat + '" data-id="' + t.id + '">' +
         media +
         '<div class="tour-body">' +
-          '<div class="tag-row"><span class="tag-cat">' + catLabel[t.cat] + '</span><span class="tag">' + t.tag + '</span>' + feeTagHtml + '</div>' +
+          '<div class="tag-row"><span class="tag-cat">' + catLabel[t.cat] + '</span>' + (t.tag ? '<span class="tag">' + t.tag + '</span>' : '') + feeTagHtml + '</div>' +
           '<h3>' + t.title + '</h3>' +
           '<p>' + t.desc + '</p>' +
           '<div class="price"><small>' + priceLabel + '</small> ' + priceValue + '</div>' +
