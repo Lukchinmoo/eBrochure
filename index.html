@@ -506,9 +506,10 @@
       width: 100%;
       max-width: 560px;
       max-height: 88vh;
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
       border-radius: 16px 16px 0 0;
-      padding: 24px clamp(18px, 4vw, 32px) 28px;
+      overflow: hidden;
     }
 
     .modal-head {
@@ -516,6 +517,26 @@
       justify-content: space-between;
       align-items: start;
       gap: 12px;
+      padding: 24px clamp(18px, 4vw, 32px) 0;
+      flex: none;
+    }
+
+    .modal-body {
+      overflow-y: auto;
+      padding: 0 clamp(18px, 4vw, 32px) 20px;
+    }
+
+    .modal-footer {
+      flex: none;
+      padding: 14px clamp(18px, 4vw, 32px);
+      border-top: 1px solid var(--line);
+      background: var(--white);
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, .06);
+    }
+
+    .modal-footer .btn {
+      width: 100%;
+      text-align: center;
     }
 
     .modal-close {
@@ -1042,43 +1063,48 @@
         <h3 id="modal-title" style="margin:0;"></h3>
         <button type="button" class="modal-close" id="modal-close" aria-label="Close">&times;</button>
       </div>
-      <div class="modal-price" id="modal-price"></div>
-      <p id="modal-desc" style="color:var(--muted);font-size:15px;"></p>
 
-      <p class="modal-section-title">Full price list</p>
-      <p class="price-legend"><span>Rate per option</span><span>Adult / Child, THB</span></p>
-      <ul id="modal-full-options" class="modal-full-options"></ul>
+      <div class="modal-body">
+        <div class="modal-price" id="modal-price"></div>
+        <p id="modal-desc" style="color:var(--muted);font-size:15px;"></p>
 
-      <div id="modal-itinerary-wrap">
-        <p class="modal-section-title">Itinerary</p>
-        <ul id="modal-itinerary"></ul>
+        <p class="modal-section-title">Full price list</p>
+        <p class="price-legend"><span>Rate per option</span><span>Adult / Child, THB</span></p>
+        <ul id="modal-full-options" class="modal-full-options"></ul>
+
+        <div id="modal-itinerary-wrap">
+          <p class="modal-section-title">Itinerary</p>
+          <ul id="modal-itinerary"></ul>
+        </div>
+
+        <div id="modal-highlights-wrap">
+          <ul id="modal-highlights"></ul>
+        </div>
+
+        <div id="modal-included-wrap">
+          <p class="modal-section-title">What's included</p>
+          <ul id="modal-included" class="modal-included"></ul>
+        </div>
+
+        <div id="modal-excluded-wrap">
+          <p class="modal-section-title">Not included</p>
+          <ul id="modal-excluded" class="modal-excluded"></ul>
+        </div>
+
+        <div id="modal-bring-wrap">
+          <p class="modal-section-title">What to bring</p>
+          <ul id="modal-bring"></ul>
+        </div>
+
+        <div id="modal-notes-wrap">
+          <p class="modal-section-title">Good to know</p>
+          <ul id="modal-notes"></ul>
+        </div>
       </div>
 
-      <div id="modal-highlights-wrap">
-        <ul id="modal-highlights"></ul>
+      <div class="modal-footer">
+        <button type="button" class="btn" id="modal-book">Book on WhatsApp</button>
       </div>
-
-      <div id="modal-included-wrap">
-        <p class="modal-section-title">What's included</p>
-        <ul id="modal-included" class="modal-included"></ul>
-      </div>
-
-      <div id="modal-excluded-wrap">
-        <p class="modal-section-title">Not included</p>
-        <ul id="modal-excluded" class="modal-excluded"></ul>
-      </div>
-
-      <div id="modal-bring-wrap">
-        <p class="modal-section-title">What to bring</p>
-        <ul id="modal-bring"></ul>
-      </div>
-
-      <div id="modal-notes-wrap">
-        <p class="modal-section-title">Good to know</p>
-        <ul id="modal-notes"></ul>
-      </div>
-
-      <button type="button" class="btn" id="modal-book">Book on WhatsApp</button>
     </div>
   </div>
 
@@ -1092,7 +1118,7 @@
           ["Big Boat","1,300","1,200"]
         ],
         itinerary: ["Get ready for an unforgettable island escape filled with stunning views and crystal-clear waters.","Pickup from Patong, Phuket, or Karon (1 hour)","Maya Bay, enjoy a scenic boat ride with breathtaking views along the way (20 minutes)","Viking Cave, explore the fascinating limestone formations and natural beauty (20 minutes)","Ko Phi Phi Don, relax and enjoy a delicious lunch on the island (1.5 hours)","Phi Phi Islands, swim and snorkel in turquoise waters surrounded by stunning scenery (1.5 hours)","Return by van to Karon, Phuket, or Patong (1 hour)"],
-        included: ["Hotel pickup and drop-off (if option selected)","Guide","National park fee","Snorkelling equipment","Buffet lunch","Drinking water"],
+        included: ["Hotel pickup and drop-off (if option selected)","Guide","Snorkelling equipment","Buffet lunch","Drinking water"],
         excluded: ["Gratuities","Personal expenses","National Park Fee (Adult 400 THB / Child 200 THB)","Cleaning fee (~20 THB/person for those entering Tonsai Pier at Phi Phi Island)"],
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
         notes: ["The Big Boat option does not include Maya Bay","Not suitable for pregnant guests or those with back, mobility, or heart conditions","Maya Bay is closed 1 August-30 September every year","Free cancellation with 24 hours notice"] },
@@ -1106,6 +1132,7 @@
         ],
         itinerary: ["08:00-08:20 Hotel pickup anywhere in Phuket (subject to location-based surcharges) and transfer to Sea Angel Pier","10:00 Departure from the harbor toward the Phi Phi Islands with complimentary tea, coffee, and water","10:30 Sightseeing around Koh Phi Phi Ley, including Maya Bay, the stunning Pileh Lagoon, Loh Samah Bay, and Viking Cave","11:30 Snorkeling in the crystal emerald waters with vibrant marine life, and a cruise by Monkey Beach to spot wild macaques","12:30 Arrival at Phi Phi Don Island for a hearty buffet lunch at a beachside restaurant, followed by free time to relax","14:30 Departure from Phi Phi Island to Khai Island","15:00 Arrive at Khai Island for swimming, sunbathing, and snorkeling over the shallow coral reefs","16:00-17:00 Return to the pier in Phuket and transfer back to your hotel"],
         included: ["Round-trip transfers from hotels in Patong, Kata, Karon and Phuket Town by air-conditioned minivan","English-speaking guide","Live tour commentary provided in English","Light breakfast with coffee or tea","Snorkelling equipment","Life jacket","Thai lunch","Soft drinks and seasonal fruits"],
+        excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
         notes: ["Not suitable for: pregnant women, people with back problems, people with mobility impairments, people with heart problems, or wheelchair users","Not allowed: pets, luggage or large bags, drones, unaccompanied minors","The tour may be cancelled due to bad weather conditions, but can be rescheduled","Children must be accompanied by an adult","The boat is not wheelchair accessible","Maya Bay is closed 1 August - 30 September every year"] },
 
@@ -1141,6 +1168,7 @@
           ]}
         ],
         included: ["Hotel pickup and drop-off","English-speaking guide","Canoeing tour","Light refreshments served onboard (soft drinks, snacks, and fruits)","Lunch buffet on the boat","National park fee included"],
+        excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
         notes: ["Not suitable for: pregnant women, people with back problems, people with mobility impairments, people with heart problems, or wheelchair users"] },
 
@@ -1150,6 +1178,7 @@
         options: [["Racha + Coral Island, speedboat","1,900","1,700"]],
         itinerary: ["08:30 Check in at Chalong Pier","09:00  Depart from Chalong Pier to Racha Yai Island","Enjoy a slider, snorkeling with plentiful coral reefs and colorful fishes at Racha Yai Island","12:00 Thai lunch served on board (extra charge)","Sailing to Kahung Beach (Coral Island)","Arrive at Kahung Beach (Coral Island) enjoy snorkeling, sunbathing, or relax on the island at your leisure; optional hornbill feeding or sea activities available (extra charge)","16:30 Depart from Kahung Beach (Coral Island) to Chalong Pier","17:00 Arrive at Chalong Pier"],
         included: ["Life jacket","Mask and snorkel","Slider and floating trampoline","Fruits","Soft drink","Accident insurance","Local guide","National park fee","Land transfer","Lunch"],
+        excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         notes: ["The program is subject to change depending on the tide and weather conditions on the day"] },
 
       { id: "coral", cat: "day", tag: "Snorkeling & banana beach", img: "assets/coral.jpg",
@@ -1158,6 +1187,7 @@
         options: [["Coral Island, speedboat","2,250","1,900"]],
         itinerary: ["Pick up from hotel and transfer to Kan Eang @ Pier Restaurant at Chalong Pier","Depart from Chalong Pier to Banana Beach, Koh Hey","Arrive at Banana Beach, Koh Hey for snorkeling, swimming, and relaxation on the white sandy beach","Explore Banana Beach scenery by snorkeling and swimming from the boat","Buffet lunch overlooking the water from Hornbill Restaurant, with drinking water and seasonal fruits as part of the premium buffet","Relax on the beach and enjoy a clear kayak","Depart from Banana Beach, Koh Hey back to Chalong Pier","Arrive at Chalong Pier for transfer to your accommodation"],
         included: ["Round-trip transfer","Round-trip speedboat","Soft drink and seasonal fruit","Drinking water","Towel","Buffet lunch","Clear kayak","Beach chair","Life jacket and snorkeling mask","Guide","First aid and travel insurance"],
+        excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         notes: ["Buffet lunch menu at Hornbill Restaurant, Banana Beach includes: mee hoon khai, fried chicken, vegetable salad, tom yum seafood, green curry tofu with vegetables, stir-fried mixed vegetables, spaghetti with tomato sauce, stir-fried chicken with cashew nut, fish fillet with chili sauce, steamed rice, seasonal fruit, and drinking water.","Age requirement: 4-80 years","Good health condition required","Basic swimming ability required"] },
 
       { id: "khai", cat: "day", tag: "Easy nearby islands", img: "assets/khai.jpg", feeTag: { label: "Incl. Kai Island entrance fees", type: "incl" },
@@ -1177,8 +1207,9 @@
         title: "Similan Islands by Speedboat", price: "THB 2,700",
         desc: "A seasonal marine-park trip for premium nature, white sand, and some of Thailand's clearest water.",
         options: [["Speedboat, 15 Oct - 15 May","2,700","2,100"]],
-        itinerary: ["06:00-08:00 Pick up at your hotel, transfer to Fantastic Similan Travel private pier","09:00 Departure to Similan Islands","10:20 Arrive at Miang Island (Koh 4) for walking across the island, snorkeling, or swimming","11:30 Enjoy a great Thai buffet lunch","12:00 Departure to Payu Island (Koh 7) for snorkeling and swimming","13:00 Departure to Ba-ngu Island (Koh 9) for snorkeling and swimming","14:00 Arrive at Similan Island (Koh 8) for swimming, snorkeling, relaxing on the beach, and climbing the viewpoint at Sailing Rock","15:00 Departure to Fantastic Similan Travel private pier","16:30 Relax and enjoy a snack, fresh fruit, and drink at the pier, then transfer to your hotel","Please note: the tour program is subject to change without prior notice due to sea and weather conditions"],
+        itinerary: ["06:00-08:00 Pick up at your hotel, transfer to the designated pier","09:00 Departure to Similan Islands","10:20 Arrive at Miang Island (Koh 4) for walking across the island, snorkeling, or swimming","11:30 Enjoy a great Thai buffet lunch","12:00 Departure to Payu Island (Koh 7) for snorkeling and swimming","13:00 Departure to Ba-ngu Island (Koh 9) for snorkeling and swimming","14:00 Arrive at Similan Island (Koh 8) for swimming, snorkeling, relaxing on the beach, and climbing the viewpoint at Sailing Rock","15:00 Departure back to the pier","16:30 Relax and enjoy a snack, fresh fruit, and drink at the pier, then transfer to your hotel","Please note: the tour program is subject to change without prior notice due to sea and weather conditions"],
         included: ["Transfer from/to hotel (Khao Lak / Phuket)","Round-trip speedboat","Thai traditional seafood premium set","Fresh fruits and drink","Snorkelling (mask, snorkel, fins, life jacket)","Beach towel, mat, and bag","Insurance","National park entrance fee","English-speaking guide"],
+        excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
         notes: ["Seasonal operation: 15 October to 15 May","Not suitable for: pregnant women, people with back problems, people with mobility impairments, people with heart problems, or wheelchair users"] },
 
@@ -1186,7 +1217,7 @@
         title: "Surin Islands by Speedboat", price: "THB 3,250",
         desc: "A nature-focused island trip with healthy reefs, clear shallow snorkeling, and a quiet atmosphere.",
         options: [["Speedboat, 15 Oct - 15 May","3,250","2,600"]],
-        itinerary: ["07:00 Pick up from your Phuket hotel lobby / Khaolak hotel, arrive at Tablamu Pier","07:30 Check-in at the pier and enjoy a light breakfast (sandwich, fresh fruit juice, tea, and coffee)","07:45 Meet your nature tour guide and get a program briefing, including coral-friendly tour details and safety instructions on board","08:00 Depart for Surin Islands by speedboat","10:00 Arrive at Surin Islands: snorkeling paradise at The Nemo / Pineapple Gulf, or relax at the scenic Twin Beach","11:00 Depart to the Sea Gypsy Moken Village to explore the traditional lifestyle of people living in the sea (entrance may be adjusted according to the national park)","11:45 Buffet lunch on the beach at Mu Koh Surin National Park with fresh tropical fruits and drinks","13:00 — Snorkeling at Mae Yai Gulf and The Tao Gulf among beautiful coral reefs","15:00 Depart back from Surin Islands to the private pier","17:30 Van transfer back to your hotel"],
+        itinerary: ["07:00 Pick up from your Phuket hotel lobby / Khaolak hotel, arrive at Tablamu Pier","07:30 Check-in at the pier and enjoy a light breakfast (sandwich, fresh fruit juice, tea, and coffee)","07:45 Meet your nature tour guide and get a program briefing, including coral-friendly tour details and safety instructions on board","08:00 Depart for Surin Islands by speedboat","10:00 Arrive at Surin Islands: snorkeling paradise at The Nemo / Pineapple Gulf, or relax at the scenic Twin Beach","11:00 Depart to the Sea Gypsy Moken Village to explore the traditional lifestyle of people living in the sea (entrance may be adjusted according to the national park)","11:45 Buffet lunch on the beach at Mu Koh Surin National Park with fresh tropical fruits and drinks","13:00 Snorkeling at Mae Yai Gulf and The Tao Gulf among beautiful coral reefs","15:00 Depart back from Surin Islands to the private pier","17:30 Van transfer back to your hotel"],
         notes: ["Toddler refers to children aged 1-3 years old (free of charge for diving trips)","Children mean 4-11 years old (not over 120 cm tall)","Adult means 12 years old and over","Pickup and drop-off in Phuket carries an additional charge of 300 baht per person","Meals are subject to change according to park policies","Season: open mid-October to mid-May (closed during monsoon season)","Not recommended for pregnant travelers or guests with severe back conditions"] },
 
       { id: "citytour", cat: "day", tag: "Culture & photos", img: "assets/city-tour.png",
@@ -1195,6 +1226,7 @@
         options: [],
         itinerary: ["This standard 5 hours sightseeing itinerary covers the following stops:","Kata-Karon Viewpoint: scenic view of the beaches","Big Buddha Viewpoint: begin with panoramic views of the island from the base of the majestic 45-metre-tall statue","Wat Chalong Temple: explore Phuket's largest and most highly revered Buddhist temple","Cashew Nut Factory: learn about local cashew harvesting and sample various flavors","Honey Farm: observe bees up close and discover the local honey production process","Phuket Old Town: stroll through the colorful streets lined with historic Sino-Portuguese architecture and local shops"],
         included: ["Private vehicle and driver","Free hotel pickup from listed zones (Kamala, Patong, Kathu, Kata, Karon, or Chalong)"],
+        excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         notes: ["Runs about 5 hours, typically starting at 10:00 AM"] },
 
       { id: "elephant", cat: "outdoor", tag: "Gentle wildlife", img: "assets/elephant.png",
