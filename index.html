@@ -293,6 +293,65 @@
       color: var(--ink);
     }
 
+    .option-list .opt-price small {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .price-legend {
+      margin: 8px 0 0;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .modal-section-title {
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin: 18px 0 8px;
+    }
+
+    .modal-included li::marker {
+      color: #1a9668;
+    }
+
+    .modal-excluded li::marker {
+      color: var(--coral);
+    }
+
+    .modal-full-options {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 4px;
+      border-top: 1px solid var(--line);
+    }
+
+    .modal-full-options li {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .modal-full-options li b {
+      color: var(--ink);
+    }
+
+    .modal-group-label {
+      font-size: 12px;
+      font-weight: 850;
+      color: var(--sea);
+      text-transform: uppercase;
+      margin: 12px 0 2px;
+    }
+
     .details-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -805,6 +864,7 @@
           <button type="button" class="cat-tab" data-cat="evening">Evening Shows</button>
         </div>
         <div class="tour-grid" id="tour-grid"></div>
+        <p class="fineprint">Rates are based on the supplied promo-rate price. Valid until 31 October 2026 and only for direct booking. Pay by credit card with no bank charge. Free cancellation 24 hours before tour departure. Terms and conditions apply. Participant details are required on booking.</p>
       </div>
     </section>
 
@@ -831,53 +891,6 @@
       </div>
     </section>
 
-
-    <section class="section" id="prices">
-      <div class="inner">
-        <div class="section-head">
-          <h2>Tour price guide</h2>
-          <p class="section-note">Adult and child rates in Thai Baht. O/R means on request. N/A means not available.</p>
-        </div>
-        <table class="price-table">
-          <thead>
-            <tr><th>Tour / Option</th><th>Adult</th><th>Child</th></tr>
-          </thead>
-          <tbody>
-            <tr class="group-row"><td colspan="3">Island tours</td></tr>
-            <tr><td>Phi Phi by Big Boat, excluding national park fee</td><td>1,300</td><td>1,200</td></tr>
-            <tr><td>Phi Phi by Speedboat + Bamboo Island</td><td>2,000</td><td>1,700</td></tr>
-            <tr><td>Phi Phi by Speedboat + Khai Island</td><td>1,700</td><td>1,500</td></tr>
-            <tr><td>Phi Phi by Catamaran + Maiton Island</td><td>3,700</td><td>3,500</td></tr>
-            <tr><td>Phang Nga Bay by Longtail Boat</td><td>1,700</td><td>1,500</td></tr>
-            <tr><td>Phang Nga Bay by Big Boat</td><td>1,700</td><td>1,500</td></tr>
-            <tr><td>Phang Nga Bay by Speedboat</td><td>1,900</td><td>1,700</td></tr>
-            <tr><td>Racha + Coral Island by Speedboat</td><td>1,900</td><td>1,700</td></tr>
-            <tr><td>Coral Island by Speedboat</td><td>2,250</td><td>1,900</td></tr>
-            <tr><td>Khai Islands, half day</td><td>1,050</td><td>900</td></tr>
-            <tr><td>Khai Islands, full day</td><td>1,450</td><td>1,250</td></tr>
-            <tr><td>Similan Islands by Speedboat, 15 Oct - 15 May</td><td>2,700</td><td>2,100</td></tr>
-            <tr><td>Surin Islands by Speedboat, 15 Oct - 15 May</td><td>3,200</td><td>2,600</td></tr>
-            <tr class="group-row"><td colspan="3">Activities and attractions</td></tr>
-            <tr><td>Elephant Sanctuary Village</td><td>1,700</td><td>1,600</td></tr>
-            <tr><td>ATV, 1 hour</td><td>1,300</td><td>1,100</td></tr>
-            <tr><td>ATV, 1.5 hours</td><td>1,500</td><td>1,300</td></tr>
-            <tr><td>ATV, 2 hours</td><td>1,700</td><td>1,500</td></tr>
-            <tr><td>Dolphin Show, regular / deluxe / VIP / VVIP</td><td>650 - 1,100</td><td>500 - 750</td></tr>
-            <tr><td>Andamanda Water Park ticket only</td><td>1,150</td><td>850</td></tr>
-            <tr><td>Andamanda + round-trip transfer</td><td>1,550</td><td>1,250</td></tr>
-            <tr class="group-row"><td colspan="3">Evening shows</td></tr>
-            <tr><td>Simon Cabaret, regular / VIP seat</td><td>650 - 750</td><td>650 - 750</td></tr>
-            <tr><td>Phuket FantaSea show only</td><td>1,700</td><td>1,700</td></tr>
-            <tr><td>Phuket FantaSea with buffet dinner</td><td>1,900</td><td>1,750</td></tr>
-            <tr><td>Carnival Magic show only</td><td>1,800</td><td>1,800</td></tr>
-            <tr><td>Carnival Magic with buffet dinner</td><td>2,000</td><td>1,900</td></tr>
-            <tr><td>Siam Niramit, silver / gold / platinum</td><td>1,000 - 1,200</td><td>900 - 1,100</td></tr>
-            <tr><td>Phuket Circus, silver to diamond</td><td>900 - 2,950</td><td>700 - 2,950</td></tr>
-          </tbody>
-        </table>
-        <p class="fineprint">Rates are based on the supplied July 2026 price list. Terms and conditions apply. Participant details are required on booking.</p>
-      </div>
-    </section>
 
     <section class="section alt" id="book">
       <div class="inner">
@@ -933,116 +946,285 @@
       </div>
       <div class="modal-price" id="modal-price"></div>
       <p id="modal-desc" style="color:var(--muted);font-size:15px;"></p>
-      <ul id="modal-highlights"></ul>
+
+      <div id="modal-itinerary-wrap">
+        <p class="modal-section-title">Itinerary</p>
+        <ul id="modal-itinerary"></ul>
+      </div>
+
+      <div id="modal-included-wrap">
+        <p class="modal-section-title">What's included</p>
+        <ul id="modal-included" class="modal-included"></ul>
+      </div>
+
+      <div id="modal-excluded-wrap">
+        <p class="modal-section-title">Not included</p>
+        <ul id="modal-excluded" class="modal-excluded"></ul>
+      </div>
+
+      <div id="modal-highlights-wrap">
+        <ul id="modal-highlights"></ul>
+      </div>
+
+      <div id="modal-notes-wrap">
+        <p class="modal-section-title">Good to know</p>
+        <ul id="modal-notes"></ul>
+      </div>
+
+      <p class="modal-section-title">Full price list</p>
+      <p class="price-legend">Price shown as Adult / Child, THB</p>
+      <ul id="modal-full-options" class="modal-full-options"></ul>
+
       <button type="button" class="btn" id="modal-book">Book on WhatsApp</button>
     </div>
   </div>
 
   <script>
+    // options format: [label, adultPrice, childPrice]  (childPrice omitted or "" if none / on request)
     var tours = [
       { id: "phiphi", cat: "day", tag: "Iconic island day", img: "assets/phi-phi.png",
         title: "Phi Phi Islands", price: "from THB 1,300",
         desc: "Maya Bay, Pileh Lagoon, Viking Cave, snorkeling, beach time, and island scenery.",
-        options: [["Big Boat","1,300"],["Speedboat + Khai Island","1,700"],["Speedboat + Bamboo Island","2,000"],["Catamaran + Maiton Island","3,700"]],
-        highlights: ["Maya Bay, Pileh Lagoon, Viking Cave, Monkey Beach, and Phi Phi Don depending on route.","Options by big boat, speedboat, or catamaran with Khai, Bamboo, or Maiton add-ons.","Good for first-time visitors, couples, friends, and families who want a full island day."] },
+        options: [
+          ["Big Boat","1,300","1,200"],
+          ["Speedboat + Khai Island","1,700","1,500"],
+          ["Speedboat + Bamboo Island","2,000","1,700"],
+          ["Catamaran + Maiton Island","3,700","3,500"]
+        ],
+        itinerary: ["Hotel pickup and transfer to the pier","Cruise to Maya Bay, Pileh Lagoon, and Viking Cave","Snorkeling at vibrant coral reefs, cruise by Monkey Beach","Buffet lunch on Phi Phi Don Island","Optional stop at Khai Island or Bamboo Island depending on package","Return transfer to hotel in the evening"],
+        included: ["Round-trip hotel transfer","English-speaking guide","National park fee","Snorkelling equipment and life jacket","Buffet lunch","Drinking water"],
+        excluded: ["Gratuities","Personal expenses","Cleaning fee (~20 THB/person at Tonsai Pier, if applicable)"],
+        notes: ["Not suitable for pregnant guests or those with back, mobility, or heart conditions","Maya Bay is closed 1 August – 30 September every year","Free cancellation with 24 hours notice"] },
+
       { id: "phangnga", cat: "day", tag: "Scenic classic", img: "assets/phang-nga.png",
         title: "Phang Nga Bay", price: "from THB 1,700",
         desc: "James Bond Island, sea-cave kayaking, limestone cliffs, and floating village scenery.",
-        options: [["Longtail Boat","1,700"],["Big Boat","1,700"],["Speedboat","1,900"],["Luxury Yacht","On request"]],
-        highlights: ["James Bond Island, sea-cave kayaking, Koh Panyee floating village, mangroves, and panoramic cruising.","Choose longtail boat for an authentic feel, big boat for comfort, speedboat for a faster day, or luxury yacht on request.","A strong choice for families and mixed-age groups because it is less swimming focused than Phi Phi."] },
+        options: [
+          ["Longtail Boat","1,700","1,500"],
+          ["Big Boat","1,700","1,500"],
+          ["Speedboat","1,900","1,700"]
+        ],
+        itinerary: ["Hotel pickup and transfer to Ao Por Pier","Canoeing through mangrove and bat caves at Panak Island","Visit James Bond Island (Khao Phing Kan)","Buffet lunch on board or at Koh Panyee floating village","Canoeing at Hong Island lagoons and caves","Swim and relax at Kaya or Naka Island","Return transfer to hotel"],
+        included: ["Hotel pickup and drop-off","English-speaking guide","Canoeing tour","Buffet lunch","National park fee","Light refreshments on board"],
+        excluded: ["Gratuities","Personal expenses"],
+        notes: ["Not suitable for pregnant guests or those with back, mobility, or heart conditions","Itinerary may change depending on tide and weather"] },
+
       { id: "racha", cat: "day", tag: "Clear-water escape", img: null,
-        title: "Racha + Coral Island", price: "from THB 1,900",
-        desc: "A clear-water island escape with beach time, snorkeling, and optional activities.",
-        options: [["Racha + Coral, speedboat","1,900"],["Coral Island only","2,250"]],
-        highlights: ["Racha Island is known for powdery sand, turquoise water, and snorkeling near Patok or Siam Bay.","Coral Island can include optional parasailing, banana boat, kayaking, or relaxed beach leisure.","Good for guests who want a full day without a very long transfer."] },
+        title: "Racha + Coral Island", price: "THB 1,900",
+        desc: "A clear-water island escape combining Racha Yai and Coral Island in one day.",
+        options: [["Racha + Coral Island, speedboat","1,900","1,700"]],
+        itinerary: ["Check-in at Chalong Pier","Depart to Racha Yai Island for snorkeling and water slide","Thai lunch served on board","Sail to Kahung Beach, Coral Island","Free time for snorkeling, sunbathing, or optional activities (extra charge)","Return to Chalong Pier"],
+        included: ["Life jacket","Mask and snorkel","Slider and floating trampoline","Fruits and soft drinks","Accident insurance","Local guide","National park fee","Land transfer","Lunch"],
+        excluded: ["Gratuities and personal expenses","Optional activities at Coral Island (parasailing, banana boat, etc.)"] },
+
+      { id: "coral", cat: "day", tag: "Snorkeling & banana beach", img: null,
+        title: "Coral Island by Speedboat", price: "THB 2,250",
+        desc: "Snorkeling and beach day at Coral Island (Koh Hey) with clear kayak and buffet lunch.",
+        options: [["Coral Island, speedboat","2,250","1,900"]],
+        itinerary: ["Hotel pickup, transfer to Chalong Pier","Depart to Banana Beach, Koh Hey","Snorkeling and swimming at Banana Beach","Buffet lunch overlooking the water","Relax on the beach with clear kayak","Return transfer to hotel"],
+        included: ["Round-trip transfer and speedboat","Soft drink, seasonal fruit, and drinking water","Towel and beach chair","Clear kayak","Life jacket and snorkeling mask","Guide, first aid, and travel insurance","Buffet lunch"],
+        excluded: ["Gratuities and personal expenses"],
+        notes: ["Suitable for ages 4-80 in good health with basic swimming ability"] },
+
       { id: "khai", cat: "day", tag: "Easy nearby islands", img: null,
-        title: "Coral Island / Khai Islands", price: "from THB 1,050",
+        title: "Khai Islands", price: "from THB 1,050",
         desc: "Easy nearby island options for a shorter, lighter tropical day with swimming and snorkeling.",
-        options: [["Khai Islands, half day","1,050"],["Khai Islands, full day","1,450"]],
-        highlights: ["Coral Island suits guests who want beach relaxation plus optional water sports.","Khai Islands are easy for families and first-time snorkelers, with shallow, calm water.","Useful when guests have limited free time."] },
+        options: [
+          ["Half day","1,050","900"],
+          ["Full day","1,450","1,250"]
+        ],
+        itinerary: ["Hotel pickup, transfer to AA Pier","Briefing with tour guide","Cruise to the Khai Islands","Snorkeling and swimming at Khai Nui Island","Relax on the beach at Khai Nok Island","Return transfer to hotel"],
+        included: ["Hotel pickup and drop-off","Insurance","Guide","Snorkelling equipment"],
+        excluded: ["Personal expenses (drinks, tips, etc.)","Other services not mentioned in the program"] },
+
       { id: "similan", cat: "day", tag: "Premium nature", img: null,
-        title: "Similan Islands", price: "from THB 2,700",
+        title: "Similan Islands", price: "THB 2,700",
         desc: "A seasonal marine-park trip for premium nature, white sand, and some of Thailand's clearest water.",
-        options: [["Similan Islands, speedboat","2,700"],["Season","15 Oct - 15 May"]],
-        highlights: ["Highlights can include Sail Rock viewpoint, multiple islands, beach time, and snorkeling.","Best for ocean lovers and guests who do not mind a longer travel day.","Seasonal operation: 15 October to 15 May."] },
+        options: [["Speedboat, 15 Oct - 15 May","2,700","2,100"]],
+        itinerary: ["Hotel pickup, transfer to the private pier","Depart to Similan Islands","Snorkeling and swimming at Miang Island","Thai buffet lunch","Snorkeling at Payu and Ba-ngu Islands","Beach time and viewpoint climb at Similan Island (Sailing Rock)","Return transfer to hotel"],
+        included: ["Round-trip transfer (Khao Lak/Phuket)","Round-trip speedboat","Thai buffet lunch","Snorkelling equipment (mask, snorkel, fins, life jacket)","Beach towel, mat, and bag","Insurance","National park entrance fee","English-speaking guide"],
+        notes: ["Seasonal operation: 15 October to 15 May","Not recommended for pregnant guests or those with severe back conditions"] },
+
       { id: "surin", cat: "day", tag: "Quiet nature", img: "assets/surin.png",
-        title: "Surin Islands", price: "from THB 3,200",
+        title: "Surin Islands", price: "THB 3,250",
         desc: "A nature-focused island trip with healthy reefs, clear shallow snorkeling, and a quiet atmosphere.",
-        options: [["Surin Islands, speedboat","3,200"],["Season","15 Oct - 15 May"]],
-        highlights: ["Common highlights include several snorkeling stops, quiet beaches, and the Moken sea gypsy village.","Good for guests who prefer a less crowded marine experience.","Seasonal operation: 15 October to 15 May."] },
+        options: [["Speedboat, 15 Oct - 15 May","3,250","2,600"]],
+        itinerary: ["Hotel pickup, transfer to Tablamu Pier","Light breakfast and briefing","Depart to Surin Islands","Snorkeling at The Nemo / Pineapple Gulf and Twin Beach","Visit the Moken sea gypsy village","Buffet lunch on the beach","Snorkeling at Mae Yai and Tao Gulf","Return transfer to hotel"],
+        included: ["Hotel or pier transfer (surcharge for out-of-zone pickup)","Light breakfast and buffet lunch on the beach","Snorkelling equipment","English-speaking guide"],
+        notes: ["Seasonal operation: 15 October to 15 May","Not recommended for pregnant guests or those with severe back conditions"] },
+
       { id: "citytour", cat: "day", tag: "Culture & photos", img: "assets/city-tour.png",
         title: "Phuket City Tour", price: "On request",
         desc: "Big Buddha, Wat Chalong, Old Town, viewpoints, local shopping, and island culture.",
         options: [],
-        highlights: ["Common stops include Big Buddha, Wat Chalong, Phuket Old Town, Karon Viewpoint, local shops, and markets.","Good for arrival or departure days, non-swimmers, seniors, and mixed-age groups.","Route, duration, guide language, and vehicle can be customized on request."] },
+        itinerary: ["Free pickup from Kamala, Patong, Kathu, Kata, Karon, or Chalong","Kata-Karon Viewpoint for scenic beach views","Big Buddha Viewpoint, a 45-metre statue with panoramic views","Wat Chalong Temple, Phuket's largest Buddhist temple","Cashew Nut Factory tasting stop","Honey Farm visit","Phuket Old Town, Sino-Portuguese architecture and local shops"],
+        included: ["Private vehicle and driver","Free hotel pickup from listed zones"],
+        notes: ["Runs about 5 hours, typically starting at 10:00 AM","Route and duration can be customized on request"] },
+
       { id: "elephant", cat: "outdoor", tag: "Gentle wildlife", img: "assets/elephant.png",
-        title: "Elephant Care", price: "from THB 1,700",
+        title: "Elephant Care", price: "THB 1,580",
         desc: "Feed, walk with, and learn about rescued elephants in a sanctuary environment.",
-        options: [],
-        highlights: ["Guests may prepare food, feed elephants, walk with them, and join mud spa or bathing activities.","Good for families, animal lovers, and guests who want an emotional, photo-friendly experience.","Ask us to confirm the exact activity style and ethical policy for the selected operator."] },
+        options: [["At Elephant Sanctuary Village","1,580","1,470"]],
+        itinerary: ["Pickup at hotel lobby, transfer to Elephant Village","Tour introduction and elephant story from the guide","Feed elephants and take photos","Jungle trail walk with elephants (with para-rubber demonstration)","Mud spa and shower with elephants","Pad Thai and seasonal fruit","Transfer back to hotel"],
+        included: ["Hotel pickup and drop-off (free for Patong, Tri Trang, Kalim; surcharge outside these zones)","Guide and full elephant program","Mud spa and shower activity","Pad Thai and seasonal fruit"],
+        notes: ["Wear comfortable clothes and trainers/sneakers; bring hat, sunglasses, swimsuit, sandals, and towel","Avoid strong perfumes, creams, or sprays","Half-day program runs about 2.5–3 hours"] },
+
       { id: "atv", cat: "outdoor", tag: "Off-road adventure", img: null,
-        title: "ATV Adventure", price: "from THB 1,300",
+        title: "ATV Adventure", price: "from THB 1,160",
         desc: "An off-road ride through jungle trails, hills, rubber plantations, and viewpoints.",
-        options: [["1 hour","1,300"],["1.5 hours","1,500"],["2 hours","1,700"]],
+        options: [
+          ["1 hour","1,160","950"],
+          ["1.5 hours","1,370","1,160"],
+          ["2 hours","1,580","1,370"]
+        ],
         highlights: ["Includes safety briefing, equipment, and professional guidance.","Can sometimes be combined with elephant care, zipline, or viewpoint programs.","Suitable for beginners and experienced riders."] },
+
       { id: "dolphin", cat: "outdoor", tag: "Family favorite", img: null,
-        title: "Dolphin Show", price: "from THB 650",
+        title: "Dolphin Show", price: "from THB 580",
         desc: "A family-friendly indoor show with trained dolphins, music, lighting, and acrobatics.",
-        options: [["Regular","650"],["Deluxe","800"],["VIP","950"],["VVIP","1,100"]],
+        options: [
+          ["Regular","580","420"],
+          ["Deluxe","790","530"],
+          ["VIP","900","580"],
+          ["VVIP","1,050","690"],
+          ["Add-on: swim with dolphins","5,780","5,780"]
+        ],
         highlights: ["Photo opportunities or swimming with dolphins may be available at extra charge.","Good for families with children or guests who want a lighter activity.","Comfortable indoor seating with multiple showtimes."] },
+
       { id: "tiger", cat: "outdoor", tag: "Wildlife photo", img: null,
-        title: "Tiger Kingdom / Tiger Park", price: "from THB 970",
+        title: "Tiger Kingdom / Tiger Park", price: "from THB 920",
         desc: "A guided tiger encounter where guests can observe and take photos under staff supervision.",
-        options: [],
+        options: [
+          ["Big Tiger, ticket only","920","920"],
+          ["Smallest Tiger, ticket only","920","920"],
+          ["Private roundtrip transfer (van)","1,370",""]
+        ],
         highlights: ["Ticket options depend on tiger size and interaction level.","Private round-trip van transfer can be arranged.","Best for guests who specifically want a wildlife-photo experience."] },
+
       { id: "zipline", cat: "outdoor", tag: "Jungle adventure", img: "assets/zipline.png",
-        title: "Zipline", price: "from THB 1,300",
-        desc: "Jungle platforms, sky bridges, canopy walks, and scenic views depending on the course.",
-        options: [],
+        title: "Zipline", price: "from THB 1,210",
+        desc: "Jungle platforms, sky bridges, canopy walks, and scenic views. Includes round-trip shared transfer.",
+        options: [
+          ["Hanuman World: 10 Platforms","1,210","1,210"],
+          ["Hanuman World: World C+","1,940","1,940"],
+          ["Erawan Patong Seaview: EP3, 12 Platforms","1,340","1,340"],
+          ["Erawan Patong Seaview: EP1, 42 Platforms","2,370","2,370"]
+        ],
+        fullOptions: [
+          { group: "Hanuman World", rows: [
+            ["Zipline 10 Platforms","1,210","1,210"],
+            ["Zipline 18 Platforms","1,730","1,730"],
+            ["Zipline 32 Platforms","2,240","2,240"],
+            ["World A+","2,680","2,680"],
+            ["World B+","2,310","2,310"],
+            ["World C+","1,940","1,940"]
+          ]},
+          { group: "Erawan Patong Seaview", rows: [
+            ["EP3, Zipline 12 Platforms","1,340","1,340"],
+            ["EPS, Zipline 17 Platforms","1,750","1,750"],
+            ["EP2, Zipline 20 Platforms","1,750","1,750"],
+            ["EP1, Zipline 42 Platforms","2,370","2,370"],
+            ["EP3 + ATV 30 min","1,950","1,750"],
+            ["EPS + ATV 30 min","2,290","2,090"],
+            ["EP2 + ATV 45 min","2,570","2,230"],
+            ["EP1 + ATV 60 min","3,250","2,840"]
+          ]}
+        ],
         highlights: ["Hanuman World focuses on immersive rainforest scenery with multiple platform options.","Erawan Patong Seaview combines jungle activity with coastal views and ATV combo options.","Good for adventure-seeking guests and families with older children."] },
+
       { id: "andamanda", cat: "outdoor", tag: "Full-day water park", img: null,
-        title: "Andamanda Water Park", price: "from THB 1,150",
+        title: "Andamanda Water Park", price: "from THB 1,050",
         desc: "A Thai-themed water park with slides, wave pool, lazy river, and family zones.",
-        options: [["Ticket only","1,150"],["Ticket + round-trip transfer","1,550"]],
+        options: [
+          ["Day Pass, ticket only","1,050","740"],
+          ["Day Pass + round-trip transfer","1,470","1,160"]
+        ],
         highlights: ["Good for families, teenagers, and guests who want a full leisure day.","Works well when weather or sea conditions make island trips less appealing.","Dining areas and cabana options available."] },
+
       { id: "spa", cat: "spa", tag: "Relax & unwind", img: null,
         title: "Spa & Massage", price: "On request",
         desc: "A relaxation option after sightseeing, island tours, shopping days, or long travel.",
         options: [],
         highlights: ["Options may include Thai massage, aromatherapy, foot massage, body scrub, and spa packages.","Good for couples, seniors, and guests who want a calm half-day activity.","Ask us to match location, treatment style, budget, and transfer needs."] },
+
       { id: "simon", cat: "evening", tag: "Cabaret night", img: null,
-        title: "Simon Cabaret", price: "from THB 650",
+        title: "Simon Cabaret", price: "from THB 580",
         desc: "A glamorous evening show in Patong with costumes, music, dancing, and stage production.",
-        options: [["Regular seat","650"],["VIP seat","750"]],
+        options: [
+          ["Regular seat, ticket only","580","580"],
+          ["VIP seat, ticket only","690","690"],
+          ["Roundtrip transfer (shared)","370","370"]
+        ],
         highlights: ["Round-trip shared transfer can be added.","Good for guests wanting a short, easy nightlife experience.","Regular and VIP seat options are available."] },
+
       { id: "fantasea", cat: "evening", tag: "Cultural spectacle", img: null,
-        title: "Phuket FantaSea", price: "from THB 1,700",
+        title: "Phuket FantaSea", price: "from THB 1,680",
         desc: "A large cultural night attraction mixing Thai mythology, stage effects, acrobatics, and dining.",
-        options: [["Show only","1,700"],["Show + buffet dinner","1,900"]],
+        options: [
+          ["Show only, regular seat","1,680","1,680"],
+          ["Show + buffet dinner, regular seat","1,890","1,740"],
+          ["Roundtrip transfer (shared)","370","370"],
+          ["Gold seat upgrade","270","270"]
+        ],
         highlights: ["Gold seat upgrade and shared transfer are available.","Good for families and guests who want a complete evening program.","Festival village with shopping, games, and cultural activities."] },
+
       { id: "carnival", cat: "evening", tag: "Evening theme park", img: null,
-        title: "Carnival Magic", price: "from THB 1,800",
+        title: "Carnival Magic", price: "from THB 1,790",
         desc: "A colorful evening theme park with lights, fantasy zones, photo spots, and a grand parade.",
-        options: [["Show only","1,800"],["Show + buffet dinner","2,000"]],
+        options: [
+          ["Show only, regular seat","1,790","1,790"],
+          ["Show + buffet dinner, regular seat","2,000","1,890"],
+          ["Royal seat upgrade","270","270"],
+          ["Royal seat + tram upgrade","370","370"],
+          ["Roundtrip transfer (shared)","370","370"]
+        ],
         highlights: ["Royal seat, tram upgrade, and shared transfer can be added.","Strong choice for families, groups, and guests who enjoy large visual productions.","Nighttime parade with illuminated floats and performances."] },
+
       { id: "siamniramit", cat: "evening", tag: "Stage & acrobatics", img: null,
-        title: "Siam Niramit / Phuket Circus", price: "from THB 900",
+        title: "Siam Niramit / Phuket Circus", price: "from THB 810",
         desc: "Evening entertainment for guests who want culture, stage performance, or acrobatics.",
-        options: [["Siam Niramit, from","1,000"],["Phuket Circus, from","900"]],
+        options: [
+          ["Siam Niramit: Silver seat","950","840"],
+          ["Siam Niramit: Gold seat","1,050","950"],
+          ["Phuket Circus: Silver seat","810","600"],
+          ["Phuket Circus: Diamond seat","2,970","2,970"]
+        ],
+        fullOptions: [
+          { group: "Siam Niramit", rows: [
+            ["Show only, Silver seat","950","840"],
+            ["Show only, Gold seat","1,050","950"],
+            ["Show only, Platinum seat","1,160","1,050"],
+            ["Add buffet dinner","210","110"],
+            ["Roundtrip transfer (shared)","270","270"]
+          ]},
+          { group: "Phuket Circus", rows: [
+            ["Silver seat, ticket only","810","600"],
+            ["Gold seat, ticket only","890","710"],
+            ["Platinum seat, ticket only","1,080","790"],
+            ["Diamond seat, ticket only","2,970","2,970"]
+          ]}
+        ],
         highlights: ["Siam Niramit focuses on Thai history, spiritual beliefs, festivals, and optional buffet dinner.","Phuket Circus offers acrobatics, aerial acts, stunts, and family-friendly entertainment.","Seat categories and transfer options vary by show."] }
     ];
 
     var catFallbackLabel = { day: "Day tour", outdoor: "Outdoor activity", spa: "Spa", evening: "Evening show" };
+
+    function priceCell(adult, child) {
+      if (!adult) return "";
+      if (!child) return "<b>" + adult + "</b>";
+      return '<span class="opt-price"><b>' + adult + '</b><small>/' + child + '</small></span>';
+    }
 
     function cardHtml(t) {
       var media = t.img
         ? '<img src="' + t.img + '" alt="' + t.title + '">'
         : '<div class="tour-img-fallback cat-' + t.cat + '">' + catFallbackLabel[t.cat] + '</div>';
       var optionsHtml = "";
-      if (t.options.length) {
-        optionsHtml = '<ul class="option-list">' + t.options.map(function (o) {
-          return '<li><span>' + o[0] + '</span><b>' + o[1] + '</b></li>';
-        }).join("") + '</ul>';
+      var shown = t.options.slice(0, 4);
+      if (shown.length) {
+        optionsHtml = '<ul class="option-list">' + shown.map(function (o) {
+          return '<li><span>' + o[0] + '</span>' + priceCell(o[1], o[2]) + '</li>';
+        }).join("") + (t.options.length > 4 ? '<li><span>+ more options</span><span></span></li>' : '') + '</ul>';
       }
       var isFrom = /^from /.test(t.price);
       var priceLabel = isFrom ? "from" : "price";
@@ -1082,16 +1264,50 @@
     var modalTitle = document.getElementById("modal-title");
     var modalPrice = document.getElementById("modal-price");
     var modalDesc = document.getElementById("modal-desc");
-    var modalHighlights = document.getElementById("modal-highlights");
     var modalBook = document.getElementById("modal-book");
     var currentTour = null;
+
+    function fillList(wrapId, listId, items) {
+      var wrap = document.getElementById(wrapId);
+      var list = document.getElementById(listId);
+      if (items && items.length) {
+        list.innerHTML = items.map(function (i) { return "<li>" + i + "</li>"; }).join("");
+        wrap.style.display = "";
+      } else {
+        wrap.style.display = "none";
+      }
+    }
 
     function openModal(tour) {
       currentTour = tour;
       modalTitle.textContent = tour.title;
       modalPrice.textContent = tour.price;
       modalDesc.textContent = tour.desc;
-      modalHighlights.innerHTML = tour.highlights.map(function (h) { return "<li>" + h + "</li>"; }).join("");
+
+      fillList("modal-itinerary-wrap", "modal-itinerary", tour.itinerary);
+      fillList("modal-included-wrap", "modal-included", tour.included);
+      fillList("modal-excluded-wrap", "modal-excluded", tour.excluded);
+      fillList("modal-highlights-wrap", "modal-highlights", tour.highlights);
+      fillList("modal-notes-wrap", "modal-notes", tour.notes);
+
+      var fullOptionsHtml = "";
+      if (tour.fullOptions) {
+        fullOptionsHtml = tour.fullOptions.map(function (grp) {
+          var rows = grp.rows.map(function (o) {
+            return '<li><span>' + o[0] + '</span>' + priceCell(o[1], o[2]) + '</li>';
+          }).join("");
+          return '<p class="modal-group-label">' + grp.group + '</p><ul class="modal-full-options">' + rows + '</ul>';
+        }).join("");
+      } else if (tour.options.length) {
+        fullOptionsHtml = tour.options.map(function (o) {
+          return '<li><span>' + o[0] + '</span>' + priceCell(o[1], o[2]) + '</li>';
+        }).join("");
+        fullOptionsHtml = '<ul class="modal-full-options">' + fullOptionsHtml + '</ul>';
+      }
+      document.getElementById("modal-full-options").outerHTML = fullOptionsHtml
+        ? '<div id="modal-full-options">' + fullOptionsHtml + '</div>'
+        : '<div id="modal-full-options" style="display:none;"></div>';
+
       overlay.classList.add("open");
     }
 
