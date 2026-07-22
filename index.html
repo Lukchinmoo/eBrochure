@@ -506,10 +506,10 @@
 
     .cart-item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 10px;
-      padding: 10px 14px;
+      padding: 12px 14px;
       border-bottom: 1px solid var(--line);
       font-size: 14px;
       color: var(--ink);
@@ -518,6 +518,45 @@
 
     .cart-item:last-child {
       border-bottom: none;
+    }
+
+    .cart-item-title {
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .cart-item-meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .cart-item-subtotal {
+      color: var(--sea);
+      font-weight: 850;
+      font-size: 14px;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 14px;
+      background: var(--mint);
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .cart-disclaimer {
+      margin: 10px 0 0;
+      padding: 12px 14px;
+      background: #fff8e1;
+      border: 1px solid #f0dfa0;
+      border-radius: 6px;
+      color: #6b4d00;
+      font-size: 12.5px;
+      line-height: 1.55;
     }
 
     .cart-remove {
@@ -661,6 +700,40 @@
 
     .modal-sheet ul li {
       margin: 8px 0;
+    }
+
+    .modal-book-box {
+      border: 1px solid #c9e8da;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 4px 0 20px;
+      background: var(--mint);
+    }
+
+    .modal-book-box .form-grid {
+      margin-top: 0;
+    }
+
+    .modal-subtotal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed #c9e8da;
+    }
+
+    .modal-subtotal-row span:first-child {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .modal-subtotal-row span:last-child {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--sea);
     }
 
     .booking-form {
@@ -1094,36 +1167,18 @@
       <div class="inner">
         <div class="section-head">
           <h2>Ready to reserve?</h2>
-          <p class="section-note">Add tours to your cart, then tell us your travel date, hotel, and group size. We will confirm availability and the final price before booking.</p>
+          <p class="section-note">Choose your date, adults, and children on each tour, add it to your cart, then tell us your hotel. We will confirm availability and the final price before booking.</p>
         </div>
         <form class="booking-form" id="booking-form">
           <div class="form-row">
             <label>Selected tours</label>
             <div class="cart-list" id="cart-list">
-              <p class="cart-empty" id="cart-empty">No tours added yet — tap "Add to cart" on any tour above.</p>
+              <p class="cart-empty" id="cart-empty">No tours added yet — tap any tour above, choose your date and pax, then add it to cart.</p>
             </div>
           </div>
           <div class="form-row">
-            <label for="pref-option">Option / notes</label>
-            <input type="text" id="pref-option" name="option" placeholder="e.g. Speedboat, VIP seat, Half day">
-          </div>
-          <div class="form-grid">
-            <div class="form-row">
-              <label for="travel-date">Travel date</label>
-              <input type="date" id="travel-date">
-            </div>
-            <div class="form-row">
-              <label for="hotel-name">Hotel name</label>
-              <input type="text" id="hotel-name" placeholder="e.g. Patong Beach Hotel">
-            </div>
-            <div class="form-row">
-              <label for="pax-adults">Adults</label>
-              <input type="number" id="pax-adults" min="0" value="2">
-            </div>
-            <div class="form-row">
-              <label for="pax-children">Children</label>
-              <input type="number" id="pax-children" min="0" value="0">
-            </div>
+            <label for="hotel-name">Hotel name</label>
+            <input type="text" id="hotel-name" placeholder="e.g. Patong Beach Hotel">
           </div>
           <div class="form-row">
             <label for="requests">Food / transfer requests</label>
@@ -1153,6 +1208,31 @@
       <div class="modal-body">
         <div class="modal-price" id="modal-price"></div>
         <p id="modal-desc" style="color:var(--muted);font-size:15px;"></p>
+
+        <div class="modal-book-box" id="modal-book-box">
+          <div class="form-row">
+            <label for="modal-option">Choose option</label>
+            <select id="modal-option"></select>
+          </div>
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="modal-date">Travel date</label>
+              <input type="date" id="modal-date">
+            </div>
+            <div class="form-row">
+              <label for="modal-adults">Adults</label>
+              <input type="number" id="modal-adults" min="1" value="2">
+            </div>
+            <div class="form-row">
+              <label for="modal-children">Children</label>
+              <input type="number" id="modal-children" min="0" value="0">
+            </div>
+          </div>
+          <div class="modal-subtotal-row">
+            <span>Estimated subtotal</span>
+            <span id="modal-subtotal">THB 0</span>
+          </div>
+        </div>
 
         <p class="modal-section-title">Full price list</p>
         <p class="price-legend"><span>Rate per option</span><span>Adult / Child, THB</span></p>
@@ -1467,6 +1547,31 @@
       return '<span class="opt-price"><b>' + adult + '</b><small>/' + child + '</small></span>';
     }
 
+    function parsePrice(str) {
+      if (!str) return NaN;
+      var n = parseFloat(String(str).replace(/[^0-9.]/g, ""));
+      return isNaN(n) ? NaN : n;
+    }
+
+    function formatTHB(n) {
+      return "THB " + n.toLocaleString("en-US");
+    }
+
+    function getOptionList(tour) {
+      if (tour.fullOptions) {
+        var flat = [];
+        tour.fullOptions.forEach(function (grp) {
+          grp.rows.forEach(function (o) {
+            flat.push({ label: grp.group + " — " + o[0], adult: o[1], child: o[2] });
+          });
+        });
+        return flat;
+      }
+      return (tour.options || []).map(function (o) {
+        return { label: o[0], adult: o[1], child: o[2] };
+      });
+    }
+
     function cardHtml(t) {
       var media = t.img
         ? '<img src="' + t.img + '" alt="' + t.title + '">'
@@ -1492,7 +1597,7 @@
           '<p>' + t.desc + '</p>' +
           '<div class="price"><small>' + priceLabel + '</small> ' + priceValue + '</div>' +
           optionsHtml +
-          '<div class="card-actions"><span class="view-details">View details &rarr;</span><button type="button" class="card-book-btn" data-book-id="' + t.id + '">Add to cart</button></div>' +
+          '<div class="card-actions"><span class="view-details">View details &rarr;</span><button type="button" class="card-book-btn" data-book-id="' + t.id + '">Select &amp; book</button></div>' +
         '</div>' +
       '</article>';
     }
@@ -1504,32 +1609,51 @@
     var cards = document.querySelectorAll(".tour-card");
 
     var cart = [];
+    var cartSeq = 0;
+    var BOOKING_DISCLAIMER = "Please note: prices shown are estimates based on our current standard rates. Final pricing is subject to availability and will be confirmed by our team prior to booking confirmation.";
 
     function renderCart() {
       var listEl = document.getElementById("cart-list");
       var badge = document.getElementById("cart-badge");
+
       if (cart.length === 0) {
-        listEl.innerHTML = '<p class="cart-empty" id="cart-empty">No tours added yet — tap "Add to cart" on any tour above.</p>';
-      } else {
-        listEl.innerHTML = cart.map(function (id) {
-          var t = tours.find(function (x) { return x.id === id; });
-          var name = t ? t.title : id;
-          return '<div class="cart-item"><span>' + name + '</span><button type="button" class="cart-remove" data-remove-id="' + id + '" aria-label="Remove">&times;</button></div>';
-        }).join("");
+        listEl.innerHTML = '<p class="cart-empty" id="cart-empty">No tours added yet — tap any tour above, choose your date and pax, then add it to cart.</p>';
+        badge.style.display = "none";
+        return;
       }
+
+      var itemsHtml = cart.map(function (item) {
+        var metaParts = ["Date: " + (item.date || "Not specified"), "Adults: " + item.adults];
+        if (item.children) metaParts.push("Children: " + item.children);
+        var subtotalTxt = item.subtotal === null ? "Price on request" : formatTHB(item.subtotal);
+        return '<div class="cart-item">' +
+          '<div class="cart-item-info">' +
+            '<div class="cart-item-title">' + item.title + (item.optionLabel ? " — " + item.optionLabel : "") + '</div>' +
+            '<div class="cart-item-meta">' + metaParts.join(" · ") + '</div>' +
+            '<div class="cart-item-subtotal">' + subtotalTxt + '</div>' +
+          '</div>' +
+          '<button type="button" class="cart-remove" data-remove-id="' + item.cartId + '" aria-label="Remove">&times;</button>' +
+        '</div>';
+      }).join("");
+
+      var grandTotal = cart.reduce(function (sum, item) { return item.subtotal === null ? sum : sum + item.subtotal; }, 0);
+      var hasOnRequest = cart.some(function (item) { return item.subtotal === null; });
+      var totalHtml = '<div class="cart-total-row"><span>Estimated total</span><span>' + formatTHB(grandTotal) + (hasOnRequest ? " +" : "") + '</span></div>';
+      var disclaimerHtml = '<p class="cart-disclaimer">' + BOOKING_DISCLAIMER + '</p>';
+
+      listEl.innerHTML = itemsHtml + totalHtml + disclaimerHtml;
       badge.textContent = cart.length;
-      badge.style.display = cart.length ? "" : "none";
+      badge.style.display = "";
     }
 
-    function addToCart(tour) {
-      if (cart.indexOf(tour.id) === -1) {
-        cart.push(tour.id);
-        renderCart();
-      }
+    function addToCart(item) {
+      item.cartId = "c" + (++cartSeq);
+      cart.push(item);
+      renderCart();
     }
 
-    function removeFromCart(id) {
-      cart = cart.filter(function (x) { return x !== id; });
+    function removeFromCart(cartId) {
+      cart = cart.filter(function (x) { return x.cartId !== cartId; });
       renderCart();
     }
 
@@ -1576,11 +1700,55 @@
       }
     }
 
+    function populateModalOptions(tour) {
+      var sel = document.getElementById("modal-option");
+      var opts = getOptionList(tour);
+      if (!opts.length) {
+        sel.innerHTML = '<option value="0">Standard — price on request</option>';
+      } else {
+        sel.innerHTML = opts.map(function (o, i) {
+          var priceTxt = parsePrice(o.adult)
+            ? (" (" + formatTHB(parsePrice(o.adult)) + (o.child && parsePrice(o.child) ? " adult / " + formatTHB(parsePrice(o.child)) + " child" : "") + ")")
+            : " (price on request)";
+          return '<option value="' + i + '">' + o.label + priceTxt + '</option>';
+        }).join("");
+      }
+      sel.setAttribute("data-tour-id", tour.id);
+      document.getElementById("modal-date").value = "";
+      document.getElementById("modal-adults").value = 2;
+      document.getElementById("modal-children").value = 0;
+    }
+
+    function currentModalOption() {
+      var sel = document.getElementById("modal-option");
+      var tour = tours.find(function (t) { return t.id === sel.getAttribute("data-tour-id"); });
+      var opts = getOptionList(tour);
+      var idx = parseInt(sel.value, 10);
+      return opts[idx] || null;
+    }
+
+    function updateModalSubtotal() {
+      var opt = currentModalOption();
+      var adults = parseInt(document.getElementById("modal-adults").value, 10) || 0;
+      var children = parseInt(document.getElementById("modal-children").value, 10) || 0;
+      var out = document.getElementById("modal-subtotal");
+      var adultPrice = opt ? parsePrice(opt.adult) : NaN;
+      if (isNaN(adultPrice)) {
+        out.textContent = "Price on request";
+        return;
+      }
+      var childPrice = parsePrice(opt.child);
+      if (isNaN(childPrice)) childPrice = adultPrice;
+      out.textContent = formatTHB(adults * adultPrice + children * childPrice);
+    }
+
     function openModal(tour) {
       currentTour = tour;
       modalTitle.textContent = tour.title;
       modalPrice.textContent = tour.price;
       modalDesc.textContent = tour.desc;
+      populateModalOptions(tour);
+      updateModalSubtotal();
 
       if (tour.itineraryGroups) {
         var wrap = document.getElementById("modal-itinerary-wrap");
@@ -1626,22 +1794,6 @@
     }
 
     grid.addEventListener("click", function (e) {
-      var bookBtn = e.target.closest(".card-book-btn");
-      if (bookBtn) {
-        e.stopPropagation();
-        var bookTourData = tours.find(function (t) { return t.id === bookBtn.getAttribute("data-book-id"); });
-        if (bookTourData) {
-          addToCart(bookTourData);
-          var originalLabel = bookBtn.textContent;
-          bookBtn.textContent = "Added \u2713";
-          bookBtn.classList.add("added");
-          setTimeout(function () {
-            bookBtn.textContent = originalLabel;
-            bookBtn.classList.remove("added");
-          }, 1200);
-        }
-        return;
-      }
       var card = e.target.closest(".tour-card");
       if (!card) return;
       var tour = tours.find(function (t) { return t.id === card.getAttribute("data-id"); });
@@ -1653,36 +1805,64 @@
       if (e.target === overlay) closeModal();
     });
 
+    document.getElementById("modal-option").addEventListener("change", updateModalSubtotal);
+    document.getElementById("modal-adults").addEventListener("input", updateModalSubtotal);
+    document.getElementById("modal-children").addEventListener("input", updateModalSubtotal);
+
     modalBook.addEventListener("click", function () {
       if (!currentTour) return;
-      addToCart(currentTour);
+      var opt = currentModalOption();
+      var adults = parseInt(document.getElementById("modal-adults").value, 10) || 1;
+      var children = parseInt(document.getElementById("modal-children").value, 10) || 0;
+      var date = document.getElementById("modal-date").value;
+
+      var subtotal = null;
+      var adultPrice = opt ? parsePrice(opt.adult) : NaN;
+      if (!isNaN(adultPrice)) {
+        var childPrice = parsePrice(opt.child);
+        if (isNaN(childPrice)) childPrice = adultPrice;
+        subtotal = adults * adultPrice + children * childPrice;
+      }
+
+      addToCart({
+        tourId: currentTour.id,
+        title: currentTour.title,
+        optionLabel: opt ? opt.label : "",
+        date: date,
+        adults: adults,
+        children: children,
+        subtotal: subtotal
+      });
+
       closeModal();
       goToCart();
     });
 
     document.getElementById("send-whatsapp").addEventListener("click", function () {
-      var tourNames = cart.map(function (id) {
-        var t = tours.find(function (x) { return x.id === id; });
-        return t ? t.title : id;
-      });
-      var tourList = tourNames.length
-        ? tourNames.map(function (n, i) { return (i + 1) + ". " + n; }).join("\n")
-        : "Not selected yet";
-      var option = document.getElementById("pref-option").value || "Not specified";
-      var date = document.getElementById("travel-date").value || "Not specified";
+      if (cart.length === 0) {
+        alert('Please add at least one tour to your cart before sending — tap a tour, choose your date and pax, then "Add to cart".');
+        return;
+      }
+
+      var lines = cart.map(function (item, i) {
+        var meta = "Date: " + (item.date || "Not specified") + " | Adults: " + item.adults + " | Children: " + item.children;
+        var priceTxt = item.subtotal === null ? "Price on request" : formatTHB(item.subtotal);
+        return (i + 1) + ". " + item.title + (item.optionLabel ? " (" + item.optionLabel + ")" : "") +
+          "\n   " + meta + "\n   Subtotal: " + priceTxt;
+      }).join("\n");
+
+      var grandTotal = cart.reduce(function (sum, item) { return item.subtotal === null ? sum : sum + item.subtotal; }, 0);
+      var hasOnRequest = cart.some(function (item) { return item.subtotal === null; });
+
       var hotel = document.getElementById("hotel-name").value || "Not specified";
-      var adults = document.getElementById("pax-adults").value || "0";
-      var children = document.getElementById("pax-children").value || "0";
       var requests = document.getElementById("requests").value || "None";
 
       var message = "Hi ITC, I would like to check availability and price.\n\n" +
-        "*Tours:*\n" + tourList + "\n\n" +
-        "*Option:* " + option + "\n" +
-        "*Travel date:* " + date + "\n" +
+        "*Tours:*\n" + lines + "\n\n" +
+        "*Estimated total:* " + formatTHB(grandTotal) + (hasOnRequest ? " (plus item(s) priced on request)" : "") + "\n" +
         "*Hotel name:* " + hotel + "\n" +
-        "*Adults:* " + adults + "\n" +
-        "*Children:* " + children + "\n" +
         "*Requests:* " + requests + "\n\n" +
+        BOOKING_DISCLAIMER + "\n" +
         "(Rates valid until 31 Oct 2026)";
 
       var url = "https://wa.me/66898661400?text=" + encodeURIComponent(message);
