@@ -1314,7 +1314,7 @@
           </div>
           <div class="form-grid">
             <div class="form-row">
-              <label for="modal-date">Travel date</label>
+              <label for="modal-date">Travel date <span class="required-mark">*</span></label>
               <input type="date" id="modal-date">
             </div>
             <div class="form-row">
@@ -2065,10 +2065,16 @@
 
     modalBook.addEventListener("click", function () {
       if (!currentTour) return;
+      var dateInput = document.getElementById("modal-date");
+      var date = dateInput.value;
+      if (!date) {
+        alert("Please select a travel date before adding this tour to your cart.");
+        dateInput.focus();
+        return;
+      }
       var opt = currentModalOption();
       var adults = parseInt(document.getElementById("modal-adults").value, 10) || 1;
       var children = parseInt(document.getElementById("modal-children").value, 10) || 0;
-      var date = document.getElementById("modal-date").value;
 
       var addonSelections = getSelectedAddons(currentTour);
       var addonTotal = 0;
