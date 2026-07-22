@@ -88,6 +88,14 @@
       text-align: right;
     }
 
+    .eyebrow .date-highlight {
+      background: var(--sun);
+      color: #14213d;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 850;
+    }
+
     .hero-copy {
       align-self: center;
       width: 100%;
@@ -1006,7 +1014,7 @@
   <header class="hero">
     <nav class="topbar" aria-label="Brochure header">
       <img class="logo" src="assets/itc-logo-transparent.png" alt="ITC logo">
-      <p class="eyebrow">Rates valid until 31 Oct 2026</p>
+      <p class="eyebrow">Rates valid until <span class="date-highlight">31 Oct 2026</span></p>
     </nav>
     <div class="hero-copy">
       <p class="eyebrow">Phuket optional tours</p>
@@ -1674,7 +1682,8 @@
         "*Hotel name:* " + hotel + "\n" +
         "*Adults:* " + adults + "\n" +
         "*Children:* " + children + "\n" +
-        "*Requests:* " + requests;
+        "*Requests:* " + requests + "\n\n" +
+        "(Rates valid until 31 Oct 2026)";
 
       var url = "https://wa.me/66898661400?text=" + encodeURIComponent(message);
       window.open(url, "_blank");
