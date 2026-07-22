@@ -505,11 +505,7 @@
     }
 
     .cart-item {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 12px 14px;
+      padding: 14px;
       border-bottom: 1px solid var(--line);
       font-size: 14px;
       color: var(--ink);
@@ -520,27 +516,78 @@
       border-bottom: none;
     }
 
+    .cart-item-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
     .cart-item-title {
       font-weight: 800;
-      margin-bottom: 4px;
+      margin: 0 0 2px;
+    }
+
+    .cart-item-option {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
     }
 
     .cart-item-meta {
       color: var(--muted);
+      font-size: 12px;
+      margin: 8px 0 10px;
+    }
+
+    .cart-price-table {
+      width: 100%;
+      border-collapse: collapse;
       font-size: 13px;
-      margin-bottom: 4px;
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
     }
 
-    .cart-item-breakdown {
-      color: #0c447c;
-      font-size: 12.5px;
-      margin-bottom: 4px;
+    .cart-price-table td {
+      padding: 5px 0;
+      vertical-align: top;
     }
 
-    .cart-item-subtotal {
-      color: var(--sea);
-      font-weight: 850;
+    .cart-line-label {
+      color: var(--muted);
+    }
+
+    .cart-line-sub {
+      color: #9aa3b2;
+      font-size: 11px;
+      margin-top: 1px;
+    }
+
+    .cart-line-price {
+      text-align: right;
+      white-space: nowrap;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .cart-item-subtotal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px solid var(--line);
+      margin-top: 4px;
+      padding-top: 10px;
+    }
+
+    .cart-item-subtotal-row span:first-child {
+      font-weight: 800;
       font-size: 14px;
+    }
+
+    .cart-item-subtotal-row span:last-child {
+      font-weight: 900;
+      font-size: 17px;
+      color: var(--sea);
     }
 
     .cart-total-row {
@@ -1679,15 +1726,13 @@
 
     function breakdownText(adultPrice, childPrice, adults, children) {
       var parts = [];
-      if (adults > 0) parts.push(formatTHB(adultPrice) + " x " + adults + (adults === 1 ? " Adult" : " Adults"));
-      if (children > 0) parts.push(formatTHB(childPrice) + " x " + children + (children === 1 ? " Child" : " Children"));
-      if (!parts.length) return "";
-      var total = adultPrice * adults + childPrice * children;
-      return parts.join(" + ") + " = " + formatTHB(total);
+      if (adults > 0) parts.push(formatTHB(adultPrice) + " \u00d7 " + adults);
+      if (children > 0) parts.push(formatTHB(childPrice) + " \u00d7 " + children);
+      return parts.join(" + ");
     }
 
     function vanBreakdownText(vanPrice, vans) {
-      return formatTHB(vanPrice) + " x " + vans + (vans === 1 ? " Van" : " Vans") + " = " + formatTHB(vanPrice * vans);
+      return formatTHB(vanPrice) + " \u00d7 " + vans + (vans === 1 ? " van" : " vans");
     }
 
     function getOptionList(tour) {
@@ -1756,20 +1801,35 @@
       }
 
       var itemsHtml = cart.map(function (item) {
-        var metaParts = ["Date: " + (item.date || "Not specified"), "Adults: " + item.adults];
-        if (item.children) metaParts.push("Children: " + item.children);
+        var metaParts = [item.date || "Not specified", item.adults + " adult" + (item.adults === 1 ? "" : "s")];
+        if (item.children) metaParts.push(item.children + " child" + (item.children === 1 ? "" : "ren"));
         var subtotalTxt = item.subtotal === null ? "Price on request" : formatTHB(item.subtotal);
+
+        var rowsHtml = "";
+        if (item.optionBreakdown || item.optionAmount !== null) {
+          rowsHtml += '<tr><td><span class="cart-line-label">Option</span>' +
+            (item.optionBreakdown ? '<div class="cart-line-sub">' + item.optionBreakdown + '</div>' : '') +
+            '</td><td class="cart-line-price">' + (item.optionAmount === null ? "On request" : formatTHB(item.optionAmount)) + '</td></tr>';
+        }
+        if (item.addons && item.addons.length) {
+          rowsHtml += item.addons.map(function (a) {
+            return '<tr><td><span class="cart-line-label">Add-on &middot; ' + a.name + '</span>' +
+              (a.breakdown ? '<div class="cart-line-sub">' + a.breakdown + '</div>' : '') +
+              '</td><td class="cart-line-price">' + (a.amount ? formatTHB(a.amount) : "On request") + '</td></tr>';
+          }).join("");
+        }
+
         return '<div class="cart-item">' +
-          '<div class="cart-item-info">' +
-            '<div class="cart-item-title">' + item.title + (item.optionLabel ? " — " + item.optionLabel : "") + '</div>' +
-            (item.optionBreakdown ? '<div class="cart-item-breakdown">Option: ' + item.optionBreakdown + '</div>' : '') +
-            (item.addons && item.addons.length ? item.addons.map(function (a) {
-              return '<div class="cart-item-breakdown">Add-on (' + a.name + '): ' + (a.breakdown || "On request") + '</div>';
-            }).join("") : "") +
-            '<div class="cart-item-meta">' + metaParts.join(" · ") + '</div>' +
-            '<div class="cart-item-subtotal">' + subtotalTxt + '</div>' +
+          '<div class="cart-item-top">' +
+            '<div>' +
+              '<p class="cart-item-title">' + item.title + '</p>' +
+              (item.optionLabel ? '<p class="cart-item-option">' + item.optionLabel + '</p>' : '') +
+            '</div>' +
+            '<button type="button" class="cart-remove" data-remove-id="' + item.cartId + '" aria-label="Remove">&times;</button>' +
           '</div>' +
-          '<button type="button" class="cart-remove" data-remove-id="' + item.cartId + '" aria-label="Remove">&times;</button>' +
+          '<p class="cart-item-meta">' + metaParts.join(" &middot; ") + '</p>' +
+          '<table class="cart-price-table">' + rowsHtml + '</table>' +
+          '<div class="cart-item-subtotal-row"><span>Subtotal</span><span>' + subtotalTxt + '</span></div>' +
         '</div>';
       }).join("");
 
@@ -2081,17 +2141,19 @@
       var addons = addonSelections.map(function (sel) {
         var r = computeAddonAmount(sel, adults, children);
         addonTotal += r.amount;
-        return { name: sel.addon.label, breakdown: r.breakdown };
+        return { name: sel.addon.label, breakdown: r.breakdown, amount: r.amount };
       });
 
       var subtotal = null;
       var optionBreakdown = "";
+      var optionAmount = null;
       var adultPrice = opt ? parsePrice(opt.adult) : NaN;
       if (!isNaN(adultPrice)) {
         var childPrice = parsePrice(opt.child);
         if (isNaN(childPrice)) childPrice = adultPrice;
         optionBreakdown = breakdownText(adultPrice, childPrice, adults, children);
-        subtotal = adults * adultPrice + children * childPrice + addonTotal;
+        optionAmount = adults * adultPrice + children * childPrice;
+        subtotal = optionAmount + addonTotal;
       }
 
       addToCart({
@@ -2099,6 +2161,7 @@
         title: currentTour.title,
         optionLabel: opt ? opt.label : "",
         optionBreakdown: optionBreakdown,
+        optionAmount: optionAmount,
         addons: addons,
         date: date,
         adults: adults,
@@ -2127,10 +2190,14 @@
         var meta = "Date: " + (item.date || "Not specified") + " | Adults: " + item.adults + " | Children: " + item.children;
         var priceTxt = item.subtotal === null ? "Price on request" : formatTHB(item.subtotal);
         var breakdownLines = [];
-        if (item.optionBreakdown) breakdownLines.push("Option: " + item.optionBreakdown);
+        if (item.optionBreakdown) {
+          var optAmtTxt = item.optionAmount === null ? "On request" : formatTHB(item.optionAmount);
+          breakdownLines.push("Option (" + item.optionBreakdown + "): " + optAmtTxt);
+        }
         if (item.addons && item.addons.length) {
           item.addons.forEach(function (a) {
-            breakdownLines.push("Add-on (" + a.name + "): " + (a.breakdown || "On request"));
+            var addonAmtTxt = a.amount ? formatTHB(a.amount) : "On request";
+            breakdownLines.push("Add-on " + a.name + " (" + (a.breakdown || "on request") + "): " + addonAmtTxt);
           });
         }
         return (i + 1) + ". " + item.title + (item.optionLabel ? " (" + item.optionLabel + ")" : "") +
