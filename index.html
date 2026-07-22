@@ -925,6 +925,17 @@
       font-weight: 900;
     }
 
+    .modal-date-hint {
+      margin: 6px 0 0;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--sea);
+    }
+
+    .modal-date-hint.is-hidden {
+      display: none;
+    }
+
     .form-row input,
     .form-row textarea {
       width: 100%;
@@ -1396,6 +1407,7 @@
             <div class="form-row">
               <label for="modal-date">Travel date <span class="required-mark">*</span></label>
               <input type="date" id="modal-date">
+              <p class="modal-date-hint is-hidden" id="modal-date-hint"></p>
             </div>
             <div class="form-row">
               <label for="modal-adults">Adults</label>
@@ -1574,11 +1586,12 @@
         title: "Similan Islands by Speedboat", price: "THB 2,700",
         desc: "A seasonal marine-park trip for premium nature, white sand, and some of Thailand's clearest water.",
         options: [["Speedboat, 15 Oct - 15 May","2,700","2,100"]],
+        dateMin: "2026-10-15", dateMax: "2026-10-31",
         itinerary: ["06:00-08:00 Pick up at your hotel, transfer to the designated pier","09:00 Departure to Similan Islands","10:20 Arrive at Miang Island (Koh 4) for walking across the island, snorkeling, or swimming","11:30 Enjoy a great Thai buffet lunch","12:00 Departure to Payu Island (Koh 7) for snorkeling and swimming","13:00 Departure to Ba-ngu Island (Koh 9) for snorkeling and swimming","14:00 Arrive at Similan Island (Koh 8) for swimming, snorkeling, relaxing on the beach, and climbing the viewpoint at Sailing Rock","15:00 Departure back to the pier","16:30 Relax and enjoy a snack, fresh fruit, and drink at the pier, then transfer to your hotel","Please note: the tour program is subject to change without prior notice due to sea and weather conditions"],
         included: ["Transfer from/to hotel (Khao Lak / Phuket)","Round-trip speedboat","Thai traditional seafood premium set","Fresh fruits and drink","Snorkelling (mask, snorkel, fins, life jacket)","Beach towel, mat, and bag","Insurance","National park entrance fee","English-speaking guide"],
         excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
-        notes: ["Seasonal operation: 15 October to 15 May","Not suitable for: pregnant women, people with back problems, people with mobility impairments, people with heart problems, or wheelchair users"] },
+        notes: ["Bookable travel dates for this rate: 15-31 October 2026","Seasonal operation: 15 October to 15 May","Not suitable for: pregnant women, people with back problems, people with mobility impairments, people with heart problems, or wheelchair users"] },
 
       { id: "surin", cat: "day", tag: "", img: "assets/surin.png",feeTag: { label: "Incl. National Park fees", type: "incl" },
         title: "Surin Islands by Speedboat", price: "THB 3,250",
@@ -1776,6 +1789,11 @@
 
     function formatTHB(n) {
       return "THB " + n.toLocaleString("en-US");
+    }
+
+    function formatDateShort(isoStr) {
+      var d = new Date(isoStr + "T00:00:00");
+      return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
     }
 
     function breakdownText(adultPrice, childPrice, adults, children) {
@@ -2101,7 +2119,20 @@
         }).join("");
       }
       sel.setAttribute("data-tour-id", tour.id);
-      document.getElementById("modal-date").value = "";
+      var dateInput = document.getElementById("modal-date");
+      var dateHint = document.getElementById("modal-date-hint");
+      dateInput.value = "";
+      if (tour.dateMin) { dateInput.min = tour.dateMin; } else { dateInput.removeAttribute("min"); }
+      if (tour.dateMax) { dateInput.max = tour.dateMax; } else { dateInput.removeAttribute("max"); }
+      if (dateHint) {
+        if (tour.dateMin && tour.dateMax) {
+          dateHint.textContent = "Bookable " + formatDateShort(tour.dateMin) + " – " + formatDateShort(tour.dateMax);
+          dateHint.classList.remove("is-hidden");
+        } else {
+          dateHint.textContent = "";
+          dateHint.classList.add("is-hidden");
+        }
+      }
       document.getElementById("modal-adults").value = 2;
       document.getElementById("modal-children").value = 0;
     }
@@ -2217,6 +2248,11 @@
       var date = dateInput.value;
       if (!date) {
         alert("Please select a travel date before adding this tour to your cart.");
+        dateInput.focus();
+        return;
+      }
+      if ((currentTour.dateMin && date < currentTour.dateMin) || (currentTour.dateMax && date > currentTour.dateMax)) {
+        alert("This tour can only be booked for travel between " + formatDateShort(currentTour.dateMin) + " and " + formatDateShort(currentTour.dateMax) + ". Please choose a date in that range.");
         dateInput.focus();
         return;
       }
