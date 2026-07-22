@@ -783,6 +783,11 @@
       text-transform: uppercase;
     }
 
+    .required-mark {
+      color: var(--coral);
+      font-weight: 900;
+    }
+
     .form-row input,
     .form-row textarea {
       width: 100%;
@@ -1204,11 +1209,11 @@
           </div>
           <div class="form-grid">
             <div class="form-row">
-              <label for="lead-name">Lead guest name</label>
+              <label for="lead-name">Lead guest name <span class="required-mark">*</span></label>
               <input type="text" id="lead-name" placeholder="e.g. John Smith">
             </div>
             <div class="form-row">
-              <label for="lead-phone">Phone / WhatsApp</label>
+              <label for="lead-phone">Phone / WhatsApp <span class="required-mark">*</span></label>
               <input type="tel" id="lead-phone" placeholder="e.g. +66 89 866 1400">
             </div>
           </div>
