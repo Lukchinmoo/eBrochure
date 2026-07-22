@@ -670,6 +670,39 @@
       padding: 0 5px;
     }
 
+    .add-toast {
+      position: fixed;
+      right: 20px;
+      bottom: 82px;
+      z-index: 41;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: 8px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, .24);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .2s, transform .2s;
+      pointer-events: none;
+    }
+
+    .add-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes cart-pulse {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.12); }
+      100% { transform: scale(1); }
+    }
+
+    .cart-fab.pulse {
+      animation: cart-pulse .35s ease;
+    }
+
     .modal-overlay {
       display: none;
       position: fixed;
@@ -1421,6 +1454,27 @@
     </div>
   </div>
 
+  <div class="modal-overlay" id="cart-overlay">
+    <div class="modal-sheet" id="cart-sheet">
+      <div class="modal-head">
+        <h3 style="margin:0;">Your cart</h3>
+        <button type="button" class="modal-close" id="cart-modal-close" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="cart-list" id="cart-list-modal">
+          <p class="cart-empty">No tours added yet — tap any tour above, choose your date and pax, then add it to cart.</p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn" id="cart-modal-book">Book on WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="add-toast" class="add-toast"></div>
+
   <script>
     // options format: [label, adultPrice, childPrice]  (childPrice omitted or "" if none / on request)
     var tours = [
@@ -1791,11 +1845,12 @@
     var BOOKING_DISCLAIMER = "Please note that the prices shown are estimates based on our current standard rates. The final quotation is subject to availability and will be confirmed by our team prior to checkout.";
 
     function renderCart() {
-      var listEl = document.getElementById("cart-list");
+      var emptyHtml = '<p class="cart-empty">No tours added yet — tap any tour above, choose your date and pax, then add it to cart.</p>';
       var badge = document.getElementById("cart-badge");
+      var targets = [document.getElementById("cart-list"), document.getElementById("cart-list-modal")];
 
       if (cart.length === 0) {
-        listEl.innerHTML = '<p class="cart-empty" id="cart-empty">No tours added yet — tap any tour above, choose your date and pax, then add it to cart.</p>';
+        targets.forEach(function (el) { if (el) el.innerHTML = emptyHtml; });
         badge.style.display = "none";
         return;
       }
@@ -1838,7 +1893,8 @@
       var totalHtml = '<div class="cart-total-row"><span>Estimated total</span><span>' + formatTHB(grandTotal) + (hasOnRequest ? " +" : "") + '</span></div>';
       var disclaimerHtml = '<p class="cart-disclaimer">' + BOOKING_DISCLAIMER + '</p>';
 
-      listEl.innerHTML = itemsHtml + totalHtml + disclaimerHtml;
+      var fullHtml = itemsHtml + totalHtml + disclaimerHtml;
+      targets.forEach(function (el) { if (el) el.innerHTML = fullHtml; });
       badge.textContent = cart.length;
       badge.style.display = "";
     }
@@ -1847,6 +1903,19 @@
       item.cartId = "c" + (++cartSeq);
       cart.push(item);
       renderCart();
+    }
+
+    var toastTimer = null;
+    function showAddToast(text) {
+      var toast = document.getElementById("add-toast");
+      var fab = document.getElementById("cart-fab");
+      toast.textContent = text;
+      toast.classList.add("show");
+      fab.classList.remove("pulse");
+      void fab.offsetWidth;
+      fab.classList.add("pulse");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2200);
     }
 
     function removeFromCart(cartId) {
@@ -1858,12 +1927,31 @@
       document.getElementById("book").scrollIntoView({ behavior: "smooth" });
     }
 
-    document.getElementById("cart-list").addEventListener("click", function (e) {
+    var cartOverlay = document.getElementById("cart-overlay");
+
+    function openCartModal() {
+      renderCart();
+      cartOverlay.classList.add("open");
+    }
+
+    function closeCartModal() {
+      cartOverlay.classList.remove("open");
+    }
+
+    document.body.addEventListener("click", function (e) {
       var btn = e.target.closest(".cart-remove");
       if (btn) removeFromCart(btn.getAttribute("data-remove-id"));
     });
 
-    document.getElementById("cart-fab").addEventListener("click", goToCart);
+    document.getElementById("cart-fab").addEventListener("click", openCartModal);
+    document.getElementById("cart-modal-close").addEventListener("click", closeCartModal);
+    cartOverlay.addEventListener("click", function (e) {
+      if (e.target === cartOverlay) closeCartModal();
+    });
+    document.getElementById("cart-modal-book").addEventListener("click", function () {
+      closeCartModal();
+      goToCart();
+    });
 
     renderCart();
 
@@ -2170,7 +2258,7 @@
       });
 
       closeModal();
-      goToCart();
+      showAddToast(currentTour.title + " added to cart");
     });
 
     document.getElementById("send-whatsapp").addEventListener("click", function () {
