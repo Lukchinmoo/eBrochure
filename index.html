@@ -49,10 +49,10 @@
     }
 
     .hero {
-      min-height: 92vh;
-      min-height: 92svh;
+      min-height: 46vh;
+      min-height: 46svh;
       display: grid;
-      grid-template-rows: auto 1fr auto;
+      grid-template-rows: auto 1fr;
       background:
         linear-gradient(100deg, rgba(9, 24, 48, .82), rgba(9, 24, 48, .42) 55%, rgba(9, 24, 48, .18)),
         url("assets/phi-phi.png") center / cover;
@@ -92,13 +92,13 @@
       align-self: center;
       width: 100%;
       max-width: 760px;
-      padding-block: 46px;
+      padding-block: 20px;
     }
 
     h1 {
-      margin: 10px 0 18px;
-      font-size: clamp(44px, 8vw, 86px);
-      line-height: .96;
+      margin: 10px 0 14px;
+      font-size: clamp(30px, 5.5vw, 52px);
+      line-height: .98;
       letter-spacing: 0;
       max-width: 11ch;
     }
@@ -106,9 +106,9 @@
     .lead {
       width: 100%;
       max-width: 650px;
-      margin: 0 0 26px;
+      margin: 0 0 20px;
       color: rgba(255, 255, 255, .92);
-      font-size: clamp(18px, 2.4vw, 24px);
+      font-size: clamp(15px, 1.8vw, 18px);
       font-weight: 520;
       overflow-wrap: anywhere;
     }
@@ -140,38 +140,17 @@
       box-shadow: none;
     }
 
-    .hero-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      width: 100%;
-      max-width: 980px;
-    }
-
-    .proof {
-      padding: 14px;
-      border: 1px solid rgba(255, 255, 255, .26);
-      border-radius: 6px;
-      background: rgba(255, 255, 255, .12);
-      backdrop-filter: blur(10px);
-    }
-
-    .proof strong {
-      display: block;
-      font-size: 19px;
-    }
-
-    .proof span {
-      color: rgba(255, 255, 255, .78);
-      font-size: 13px;
-    }
-
     .section {
       padding: 54px clamp(18px, 5vw, 64px);
     }
 
     .section.alt {
       background: var(--white);
+    }
+
+    .section-tight {
+      padding-top: 27px;
+      padding-bottom: 27px;
     }
 
     .inner {
@@ -476,10 +455,29 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      margin-top: 12px;
       font-size: 13px;
       font-weight: 850;
       color: var(--sea);
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .card-book-btn {
+      flex: none;
+      border: none;
+      background: var(--sun);
+      color: #14213d;
+      font-size: 13px;
+      font-weight: 850;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
     }
 
     .tour-card {
@@ -842,16 +840,10 @@
       }
     }
 
-    @media (max-width: 900px) and (min-width: 641px) {
-      .hero-strip {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
     @media (max-width: 640px) {
       .hero {
-        min-height: 94vh;
-        min-height: 94svh;
+        min-height: 47vh;
+        min-height: 47svh;
       }
 
       .topbar {
@@ -935,12 +927,6 @@
       <h1>Make every free day count.</h1>
       <p class="lead">Island trips, wildlife, family fun, city tours, spa, and evening shows for guests who want more from Phuket.</p>
     </div>
-    <div class="hero-strip" aria-label="Booking benefits">
-      <div class="proof"><strong>24h</strong><span>Free cancellation 24 hours prior to tour departure</span></div>
-      <div class="proof"><strong>Family</strong><span>Easy choices for couples, groups, and children</span></div>
-      <div class="proof"><strong>Fast</strong><span>Clear prices and booking details in one place</span></div>
-      <div class="proof"><strong>Flexible</strong><span>Ask us to check vegetarian, Jain, or Indian meal requests</span></div>
-    </div>
   </header>
 
   <main>
@@ -966,8 +952,7 @@
           <div>
             <h4>Important Notice</h4>
             <ul>
-              <li>Rates are based on the promotional price and must be booked directly with ITC.</li>
-	      <li>Valid from now until <span class="highlight-date"> 31 October 2026</span> </li>
+              <li>Rates are based on the supplied promo-rate price. Valid until <span class="highlight-date">31 October 2026</span> and only for direct booking.</li>
               <li>Pay by credit card with no bank charge.</li>
               <li>Free cancellation 24 hours before tour departure.</li>
               <li>Terms and conditions apply.</li>
@@ -977,7 +962,7 @@
           <div>
             <h4>Cancellation Policy</h4>
             <ul>
-              <li>Customers will receive a full refund or credit for cancellations made at least 24 hours before tour departure.</li>
+              <li>Customers will receive a full refund or credit for cancellation at least 24 hours notice before departure.</li>
               <li>Customers will also receive a full refund or credit in case of operator cancellation due to weather or other unforeseen circumstances.</li>
               <li>Contact us by phone to cancel or inquire about a cancellation.</li>
               <li>No-shows will be charged the full price.</li>
@@ -987,10 +972,10 @@
       </div>
     </section>
 
-    <section class="section alt">
+    <section class="section alt section-tight">
       <div class="inner bundle">
         <div class="panel">
-          <h3>Recommended for Indian guests</h3>
+          <h3>Recommended for guests</h3>
           <ul>
             <li>For first-time Phuket visitors: Phi Phi or Phang Nga Bay.</li>
             <li>For families with children: Khai Islands, Andamanda Water Park, Dolphin Show, or evening shows.</li>
@@ -1131,7 +1116,7 @@
           ["Speedboat + Khai Island","1,700","1,500"],
           ["Speedboat + Bamboo Island","2,000","1,700"]
         ],
-        itinerary: ["08:00-08:20 Hotel pickup anywhere in Phuket (subject to location-based surcharges) and transfer to Sea Angel Pier","10:00 Departure from the harbor toward the Phi Phi Islands with complimentary tea, coffee, and water","10:30 Sightseeing around Koh Phi Phi Ley, including Maya Bay, the stunning Pileh Lagoon, Loh Samah Bay, and Viking Cave","11:30 Snorkeling in the crystal emerald waters with vibrant marine life, and a cruise by Monkey Beach to spot wild macaques","12:30 Arrival at Phi Phi Don Island for a hearty buffet lunch at a beachside restaurant, followed by free time to relax","14:30 Departure from Phi Phi Island to Khai Island","15:00 Arrive at Khai Island for swimming, sunbathing, and snorkeling over the shallow coral reefs","16:00-17:00 Return to the pier in Phuket and transfer back to your hotel"],
+        itinerary: ["08:00-08:20 Hotel pickup anywhere in Phuket (subject to location-based surcharges) and transfer to the designated pier","10:00 Departure from the harbor toward the Phi Phi Islands with complimentary tea, coffee, and water","10:30 Sightseeing around Koh Phi Phi Ley, including Maya Bay, the stunning Pileh Lagoon, Loh Samah Bay, and Viking Cave","11:30 Snorkeling in the crystal emerald waters with vibrant marine life, and a cruise by Monkey Beach to spot wild macaques","12:30 Arrival at Phi Phi Don Island for a hearty buffet lunch at a beachside restaurant, followed by free time to relax","14:30 Departure from Phi Phi Island to Khai Island","15:00 Arrive at Khai Island for swimming, sunbathing, and snorkeling over the shallow coral reefs","16:00-17:00 Return to the pier in Phuket and transfer back to your hotel"],
         included: ["Round-trip transfers from hotels in Patong, Kata, Karon and Phuket Town by air-conditioned minivan","English-speaking guide","Live tour commentary provided in English","Light breakfast with coffee or tea","Snorkelling equipment","Life jacket","Thai lunch","Soft drinks and seasonal fruits"],
         excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
         bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
@@ -1407,7 +1392,7 @@
           '<p>' + t.desc + '</p>' +
           '<div class="price"><small>' + priceLabel + '</small> ' + priceValue + '</div>' +
           optionsHtml +
-          '<span class="view-details">View details &rarr;</span>' +
+          '<div class="card-actions"><span class="view-details">View details &rarr;</span><button type="button" class="card-book-btn" data-book-id="' + t.id + '">Book on WhatsApp</button></div>' +
         '</div>' +
       '</article>';
     }
@@ -1417,6 +1402,15 @@
 
     var tabs = document.querySelectorAll(".cat-tab");
     var cards = document.querySelectorAll(".tour-card");
+
+    function bookTour(tour) {
+      document.getElementById("pref-tour").value = tour.title;
+      closeModal();
+      document.getElementById("book").scrollIntoView({ behavior: "smooth" });
+      setTimeout(function () {
+        document.getElementById("travel-date").focus();
+      }, 500);
+    }
 
     tabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
@@ -1498,6 +1492,13 @@
     }
 
     grid.addEventListener("click", function (e) {
+      var bookBtn = e.target.closest(".card-book-btn");
+      if (bookBtn) {
+        e.stopPropagation();
+        var bookTourData = tours.find(function (t) { return t.id === bookBtn.getAttribute("data-book-id"); });
+        if (bookTourData) bookTour(bookTourData);
+        return;
+      }
       var card = e.target.closest(".tour-card");
       if (!card) return;
       var tour = tours.find(function (t) { return t.id === card.getAttribute("data-id"); });
@@ -1511,12 +1512,7 @@
 
     modalBook.addEventListener("click", function () {
       if (!currentTour) return;
-      document.getElementById("pref-tour").value = currentTour.title;
-      closeModal();
-      document.getElementById("book").scrollIntoView({ behavior: "smooth" });
-      setTimeout(function () {
-        document.getElementById("travel-date").focus();
-      }, 500);
+      bookTour(currentTour);
     });
 
     document.getElementById("send-whatsapp").addEventListener("click", function () {
@@ -1528,14 +1524,14 @@
       var children = document.getElementById("pax-children").value || "0";
       var requests = document.getElementById("requests").value || "None";
 
-      var message = "Hi ITC, I would like to check availability and price.\\n" +
-        "Preferred tour: " + tour + "\\n" +
-        "Option: " + option + "\\n" +
-        "Travel date: " + date + "\\n" +
-        "Hotel name: " + hotel + "\\n" +
-        "Adults: " + adults + "\\n" +
-        "Children: " + children + "\\n" +
-        "Requests: " + requests;
+      var message = "Hi ITC, I would like to check availability and price.\n\n" +
+        "*Preferred tour:* " + tour + "\n" +
+        "*Option:* " + option + "\n" +
+        "*Travel date:* " + date + "\n" +
+        "*Hotel name:* " + hotel + "\n" +
+        "*Adults:* " + adults + "\n" +
+        "*Children:* " + children + "\n" +
+        "*Requests:* " + requests;
 
       var url = "https://wa.me/66898661400?text=" + encodeURIComponent(message);
       window.open(url, "_blank");
