@@ -736,6 +736,26 @@
       color: var(--sea);
     }
 
+    .modal-addon-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: -4px 0 20px;
+      background: var(--white);
+    }
+
+    .modal-addon-box .form-row:last-child {
+      margin-top: 12px;
+    }
+
+    .modal-addon-box.is-hidden {
+      display: none;
+    }
+
+    #modal-addon-van-row.is-hidden {
+      display: none;
+    }
+
     .booking-form {
       display: grid;
       gap: 14px;
@@ -1234,6 +1254,19 @@
           </div>
         </div>
 
+        <div class="modal-addon-box is-hidden" id="modal-addon-box">
+          <div class="form-row">
+            <label for="modal-addon">Add-on</label>
+            <select id="modal-addon">
+              <option value="-1">None</option>
+            </select>
+          </div>
+          <div class="form-row is-hidden" id="modal-addon-van-row">
+            <label for="modal-addon-vans">Number of van(s)</label>
+            <input type="number" id="modal-addon-vans" min="1" value="1">
+          </div>
+        </div>
+
         <p class="modal-section-title">Full price list</p>
         <p class="price-legend"><span>Rate per option</span><span>Adult / Child, THB</span></p>
         <ul id="modal-full-options" class="modal-full-options"></ul>
@@ -1410,8 +1443,10 @@
         options: [
           ["1 hour","1,160","950"],
           ["1.5 hours","1,370","1,160"],
-          ["2 hours","1,580","1,370"],
-          ["Private roundtrip transfer (per van)","1,370",""]
+          ["2 hours","1,580","1,370"]
+        ],
+        addons: [
+          { label: "Private roundtrip transfer (per van)", adult: "1,370", perVan: true }
         ],
         highlights: ["Includes safety briefing, equipment, and professional guidance.","Can sometimes be combined with elephant care, zipline, or viewpoint programs.","Suitable for beginners and experienced riders."] },
 
@@ -1422,9 +1457,11 @@
           ["Regular","580","420"],
           ["Deluxe","790","530"],
           ["VIP","900","580"],
-          ["VVIP","1,050","690"],
-          ["Add-on: swim with dolphins","5,780","5,780"],
-          ["Private roundtrip transfer (per van)","1,370",""]
+          ["VVIP","1,050","690"]
+        ],
+        addons: [
+          { label: "Swim with dolphins", adult: "5,780", child: "5,780" },
+          { label: "Private roundtrip transfer (per van)", adult: "1,370", perVan: true }
         ],
         highlights: ["Photo opportunities or swimming with dolphins may be available at extra charge.","Good for families with children or guests who want a lighter activity.","Comfortable indoor seating with multiple showtimes."] },
 
@@ -1433,8 +1470,10 @@
         desc: "A guided tiger encounter where guests can observe and take photos under staff supervision.",
         options: [
           ["Big Tiger, ticket only","920","920"],
-          ["Smallest Tiger, ticket only","920","920"],
-          ["Private roundtrip transfer (per van)","1,370",""]
+          ["Smallest Tiger, ticket only","920","920"]
+        ],
+        addons: [
+          { label: "Private roundtrip transfer (per van)", adult: "1,370", perVan: true }
         ],
         highlights: ["Ticket options depend on tiger size and interaction level.","Private round-trip van transfer can be arranged.","Best for guests who specifically want a wildlife-photo experience."] },
 
@@ -1486,8 +1525,10 @@
         desc: "A glamorous evening show in Patong with costumes, music, dancing, and stage production.",
         options: [
           ["Regular seat, ticket only","580","580"],
-          ["VIP seat, ticket only","690","690"],
-          ["Roundtrip transfer (shared)","370","370"]
+          ["VIP seat, ticket only","690","690"]
+        ],
+        addons: [
+          { label: "Roundtrip transfer (shared)", adult: "370", child: "370" }
         ],
         highlights: ["Round-trip shared transfer can be added.","Good for guests wanting a short, easy nightlife experience.","Regular and VIP seat options are available."] },
 
@@ -1496,9 +1537,11 @@
         desc: "A large cultural night attraction mixing Thai mythology, stage effects, acrobatics, and dining.",
         options: [
           ["Show only, regular seat","1,680","1,680"],
-          ["Show + buffet dinner, regular seat","1,890","1,740"],
-          ["Roundtrip transfer (shared)","370","370"],
-          ["Gold seat upgrade","270","270"]
+          ["Show + buffet dinner, regular seat","1,890","1,740"]
+        ],
+        addons: [
+          { label: "Roundtrip transfer (shared)", adult: "370", child: "370" },
+          { label: "Gold seat upgrade", adult: "270", child: "270" }
         ],
         highlights: ["Gold seat upgrade and shared transfer are available.","Good for families and guests who want a complete evening program.","Festival village with shopping, games, and cultural activities."] },
 
@@ -1507,10 +1550,12 @@
         desc: "A colorful evening theme park with lights, fantasy zones, photo spots, and a grand parade.",
         options: [
           ["Show only, regular seat","1,790","1,790"],
-          ["Show + buffet dinner, regular seat","2,000","1,890"],
-          ["Royal seat upgrade","270","270"],
-          ["Royal seat + tram upgrade","370","370"],
-          ["Roundtrip transfer (shared)","370","370"]
+          ["Show + buffet dinner, regular seat","2,000","1,890"]
+        ],
+        addons: [
+          { label: "Royal seat upgrade", adult: "270", child: "270" },
+          { label: "Royal seat + tram upgrade", adult: "370", child: "370" },
+          { label: "Roundtrip transfer (shared)", adult: "370", child: "370" }
         ],
         highlights: ["Royal seat, tram upgrade, and shared transfer can be added.","Strong choice for families, groups, and guests who enjoy large visual productions.","Nighttime parade with illuminated floats and performances."] },
 
@@ -1520,9 +1565,11 @@
         options: [
           ["Show only, Silver seat","950","840"],
           ["Show only, Gold seat","1,050","950"],
-          ["Show only, Platinum seat","1,160","1,050"],
-          ["Add buffet dinner","250","150"],
-          ["Roundtrip transfer (shared)","270","270"]
+          ["Show only, Platinum seat","1,160","1,050"]
+        ],
+        addons: [
+          { label: "Add buffet dinner", adult: "250", child: "150" },
+          { label: "Roundtrip transfer (shared)", adult: "270", child: "270" }
         ],
         highlights: ["Grand theatrical show with over 100 performers, dazzling costumes, and special effects.","Three-act performance showcasing Thai history, spiritual beliefs, and festivals.","Authentic Thai Village with crafts, dances, and cultural demonstrations."] },
 
@@ -1533,8 +1580,10 @@
           ["Silver seat, ticket only","810","600"],
           ["Gold seat, ticket only","890","710"],
           ["Platinum seat, ticket only","1,080","790"],
-          ["Diamond seat, ticket only","2,970","2,970"],
-          ["Round Trip Private Transfer","1,370",""]
+          ["Diamond seat, ticket only","2,970","2,970"]
+        ],
+        addons: [
+          { label: "Round Trip Private Transfer", adult: "1,370", perVan: true }
         ],
         highlights: ["Spectacular acrobatic performances, aerial acts, and stunts.","Skilled international artists with dynamic choreography.","Fun and engaging entertainment suitable for all ages."] }
     ];
@@ -1610,7 +1659,7 @@
 
     var cart = [];
     var cartSeq = 0;
-    var BOOKING_DISCLAIMER = "Please note: prices shown are estimates based on our current standard rates. Final pricing is subject to availability and will be confirmed by our team prior to booking confirmation.";
+    var BOOKING_DISCLAIMER = "Please note that the prices shown are estimates based on our current standard rates. The final quotation is subject to availability and will be confirmed by our team prior to checkout.";
 
     function renderCart() {
       var listEl = document.getElementById("cart-list");
@@ -1629,6 +1678,7 @@
         return '<div class="cart-item">' +
           '<div class="cart-item-info">' +
             '<div class="cart-item-title">' + item.title + (item.optionLabel ? " — " + item.optionLabel : "") + '</div>' +
+            (item.addonLabel ? '<div class="cart-item-meta">Add-on: ' + item.addonLabel + '</div>' : '') +
             '<div class="cart-item-meta">' + metaParts.join(" · ") + '</div>' +
             '<div class="cart-item-subtotal">' + subtotalTxt + '</div>' +
           '</div>' +
@@ -1700,6 +1750,61 @@
       }
     }
 
+    function populateModalAddons(tour) {
+      var box = document.getElementById("modal-addon-box");
+      var sel = document.getElementById("modal-addon");
+      var vanRow = document.getElementById("modal-addon-van-row");
+
+      if (!tour.addons || !tour.addons.length) {
+        box.classList.add("is-hidden");
+        sel.innerHTML = '<option value="-1">None</option>';
+        vanRow.classList.add("is-hidden");
+        return;
+      }
+
+      box.classList.remove("is-hidden");
+      var opts = ['<option value="-1">None</option>'];
+      tour.addons.forEach(function (a, i) {
+        var adultPrice = parsePrice(a.adult);
+        var priceTxt = isNaN(adultPrice) ? "" : (a.perVan
+          ? " (" + formatTHB(adultPrice) + " / van)"
+          : (" (" + formatTHB(adultPrice) + (a.child && parsePrice(a.child) !== adultPrice ? " adult / " + formatTHB(parsePrice(a.child)) + " child" : "") + ")"));
+        opts.push('<option value="' + i + '">' + a.label + priceTxt + '</option>');
+      });
+      sel.innerHTML = opts.join("");
+      document.getElementById("modal-addon-vans").value = 1;
+      vanRow.classList.add("is-hidden");
+    }
+
+    function currentModalAddon(tour) {
+      var sel = document.getElementById("modal-addon");
+      var idx = parseInt(sel.value, 10);
+      if (idx < 0 || !tour.addons) return null;
+      return tour.addons[idx] || null;
+    }
+
+    function getAddonAmount(tour, adults, children) {
+      var addon = currentModalAddon(tour);
+      if (!addon) return { addon: null, amount: 0 };
+      var adultPrice = parsePrice(addon.adult);
+      if (isNaN(adultPrice)) return { addon: addon, amount: 0 };
+      if (addon.perVan) {
+        var vans = parseInt(document.getElementById("modal-addon-vans").value, 10) || 1;
+        return { addon: addon, amount: adultPrice * vans, vans: vans };
+      }
+      var childPrice = parsePrice(addon.child);
+      if (isNaN(childPrice)) childPrice = adultPrice;
+      return { addon: addon, amount: adults * adultPrice + children * childPrice };
+    }
+
+    document.getElementById("modal-addon").addEventListener("change", function () {
+      var vanRow = document.getElementById("modal-addon-van-row");
+      var addon = currentTour ? currentModalAddon(currentTour) : null;
+      vanRow.classList.toggle("is-hidden", !(addon && addon.perVan));
+      updateModalSubtotal();
+    });
+    document.getElementById("modal-addon-vans").addEventListener("input", updateModalSubtotal);
+
     function populateModalOptions(tour) {
       var sel = document.getElementById("modal-option");
       var opts = getOptionList(tour);
@@ -1732,14 +1837,16 @@
       var adults = parseInt(document.getElementById("modal-adults").value, 10) || 0;
       var children = parseInt(document.getElementById("modal-children").value, 10) || 0;
       var out = document.getElementById("modal-subtotal");
+      var addonInfo = currentTour ? getAddonAmount(currentTour, adults, children) : { amount: 0 };
       var adultPrice = opt ? parsePrice(opt.adult) : NaN;
       if (isNaN(adultPrice)) {
-        out.textContent = "Price on request";
+        out.textContent = addonInfo.amount ? ("Price on request + " + formatTHB(addonInfo.amount)) : "Price on request";
         return;
       }
       var childPrice = parsePrice(opt.child);
       if (isNaN(childPrice)) childPrice = adultPrice;
-      out.textContent = formatTHB(adults * adultPrice + children * childPrice);
+      var total = adults * adultPrice + children * childPrice + (addonInfo.amount || 0);
+      out.textContent = formatTHB(total);
     }
 
     function openModal(tour) {
@@ -1748,6 +1855,7 @@
       modalPrice.textContent = tour.price;
       modalDesc.textContent = tour.desc;
       populateModalOptions(tour);
+      populateModalAddons(tour);
       updateModalSubtotal();
 
       if (tour.itineraryGroups) {
@@ -1782,6 +1890,13 @@
         }).join("");
         fullOptionsHtml = '<ul class="modal-full-options">' + fullOptionsHtml + '</ul>';
       }
+      if (tour.addons && tour.addons.length) {
+        var addonRows = tour.addons.map(function (a) {
+          var priceLabel = a.perVan ? a.adult + " /van" : a.adult;
+          return '<li><span>' + a.label + '</span>' + priceCell(priceLabel, a.perVan ? "" : a.child) + '</li>';
+        }).join("");
+        fullOptionsHtml += '<p class="modal-group-label">Add-ons</p><ul class="modal-full-options">' + addonRows + '</ul>';
+      }
       document.getElementById("modal-full-options").outerHTML = fullOptionsHtml
         ? '<div id="modal-full-options">' + fullOptionsHtml + '</div>'
         : '<div id="modal-full-options" style="display:none;"></div>';
@@ -1815,19 +1930,21 @@
       var adults = parseInt(document.getElementById("modal-adults").value, 10) || 1;
       var children = parseInt(document.getElementById("modal-children").value, 10) || 0;
       var date = document.getElementById("modal-date").value;
+      var addonInfo = getAddonAmount(currentTour, adults, children);
 
       var subtotal = null;
       var adultPrice = opt ? parsePrice(opt.adult) : NaN;
       if (!isNaN(adultPrice)) {
         var childPrice = parsePrice(opt.child);
         if (isNaN(childPrice)) childPrice = adultPrice;
-        subtotal = adults * adultPrice + children * childPrice;
+        subtotal = adults * adultPrice + children * childPrice + (addonInfo.amount || 0);
       }
 
       addToCart({
         tourId: currentTour.id,
         title: currentTour.title,
         optionLabel: opt ? opt.label : "",
+        addonLabel: addonInfo.addon ? addonInfo.addon.label + (addonInfo.vans ? " x" + addonInfo.vans + " van(s)" : "") : "",
         date: date,
         adults: adults,
         children: children,
@@ -1848,6 +1965,7 @@
         var meta = "Date: " + (item.date || "Not specified") + " | Adults: " + item.adults + " | Children: " + item.children;
         var priceTxt = item.subtotal === null ? "Price on request" : formatTHB(item.subtotal);
         return (i + 1) + ". " + item.title + (item.optionLabel ? " (" + item.optionLabel + ")" : "") +
+          (item.addonLabel ? "\n   Add-on: " + item.addonLabel : "") +
           "\n   " + meta + "\n   Subtotal: " + priceTxt;
       }).join("\n");
 
