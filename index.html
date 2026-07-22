@@ -531,6 +531,12 @@
       margin-bottom: 4px;
     }
 
+    .cart-item-breakdown {
+      color: #0c447c;
+      font-size: 12.5px;
+      margin-bottom: 4px;
+    }
+
     .cart-item-subtotal {
       color: var(--sea);
       font-weight: 850;
@@ -1196,6 +1202,16 @@
               <p class="cart-empty" id="cart-empty">No tours added yet — tap any tour above, choose your date and pax, then add it to cart.</p>
             </div>
           </div>
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="lead-name">Lead guest name</label>
+              <input type="text" id="lead-name" placeholder="e.g. John Smith">
+            </div>
+            <div class="form-row">
+              <label for="lead-phone">Phone / WhatsApp</label>
+              <input type="tel" id="lead-phone" placeholder="e.g. +66 89 866 1400">
+            </div>
+          </div>
           <div class="form-row">
             <label for="hotel-name">Hotel name</label>
             <input type="text" id="hotel-name" placeholder="e.g. Patong Beach Hotel">
@@ -1606,6 +1622,19 @@
       return "THB " + n.toLocaleString("en-US");
     }
 
+    function breakdownText(adultPrice, childPrice, adults, children) {
+      var parts = [];
+      if (adults > 0) parts.push(formatTHB(adultPrice) + " x " + adults + (adults === 1 ? " Adult" : " Adults"));
+      if (children > 0) parts.push(formatTHB(childPrice) + " x " + children + (children === 1 ? " Child" : " Children"));
+      if (!parts.length) return "";
+      var total = adultPrice * adults + childPrice * children;
+      return parts.join(" + ") + " = " + formatTHB(total);
+    }
+
+    function vanBreakdownText(vanPrice, vans) {
+      return formatTHB(vanPrice) + " x " + vans + (vans === 1 ? " Van" : " Vans") + " = " + formatTHB(vanPrice * vans);
+    }
+
     function getOptionList(tour) {
       if (tour.fullOptions) {
         var flat = [];
@@ -1678,7 +1707,8 @@
         return '<div class="cart-item">' +
           '<div class="cart-item-info">' +
             '<div class="cart-item-title">' + item.title + (item.optionLabel ? " — " + item.optionLabel : "") + '</div>' +
-            (item.addonLabel ? '<div class="cart-item-meta">Add-on: ' + item.addonLabel + '</div>' : '') +
+            (item.optionBreakdown ? '<div class="cart-item-breakdown">Option: ' + item.optionBreakdown + '</div>' : '') +
+            (item.addonName ? '<div class="cart-item-breakdown">Add-on (' + item.addonName + '): ' + (item.addonBreakdown || "On request") + '</div>' : '') +
             '<div class="cart-item-meta">' + metaParts.join(" · ") + '</div>' +
             '<div class="cart-item-subtotal">' + subtotalTxt + '</div>' +
           '</div>' +
@@ -1933,18 +1963,38 @@
       var addonInfo = getAddonAmount(currentTour, adults, children);
 
       var subtotal = null;
+      var optionBreakdown = "";
       var adultPrice = opt ? parsePrice(opt.adult) : NaN;
       if (!isNaN(adultPrice)) {
         var childPrice = parsePrice(opt.child);
         if (isNaN(childPrice)) childPrice = adultPrice;
+        optionBreakdown = breakdownText(adultPrice, childPrice, adults, children);
         subtotal = adults * adultPrice + children * childPrice + (addonInfo.amount || 0);
+      }
+
+      var addonName = "";
+      var addonBreakdown = "";
+      if (addonInfo.addon) {
+        addonName = addonInfo.addon.label;
+        var addonAdultPrice = parsePrice(addonInfo.addon.adult);
+        if (!isNaN(addonAdultPrice)) {
+          if (addonInfo.addon.perVan) {
+            addonBreakdown = vanBreakdownText(addonAdultPrice, addonInfo.vans || 1);
+          } else {
+            var addonChildPrice = parsePrice(addonInfo.addon.child);
+            if (isNaN(addonChildPrice)) addonChildPrice = addonAdultPrice;
+            addonBreakdown = breakdownText(addonAdultPrice, addonChildPrice, adults, children);
+          }
+        }
       }
 
       addToCart({
         tourId: currentTour.id,
         title: currentTour.title,
         optionLabel: opt ? opt.label : "",
-        addonLabel: addonInfo.addon ? addonInfo.addon.label + (addonInfo.vans ? " x" + addonInfo.vans + " van(s)" : "") : "",
+        optionBreakdown: optionBreakdown,
+        addonName: addonName,
+        addonBreakdown: addonBreakdown,
         date: date,
         adults: adults,
         children: children,
@@ -1961,11 +2011,21 @@
         return;
       }
 
+      var leadName = document.getElementById("lead-name").value.trim();
+      var leadPhone = document.getElementById("lead-phone").value.trim();
+      if (!leadName || !leadPhone) {
+        alert("Please enter the lead guest name and phone/WhatsApp number before sending.");
+        return;
+      }
+
       var lines = cart.map(function (item, i) {
         var meta = "Date: " + (item.date || "Not specified") + " | Adults: " + item.adults + " | Children: " + item.children;
         var priceTxt = item.subtotal === null ? "Price on request" : formatTHB(item.subtotal);
+        var breakdownLines = [];
+        if (item.optionBreakdown) breakdownLines.push("Option: " + item.optionBreakdown);
+        if (item.addonName) breakdownLines.push("Add-on (" + item.addonName + "): " + (item.addonBreakdown || "On request"));
         return (i + 1) + ". " + item.title + (item.optionLabel ? " (" + item.optionLabel + ")" : "") +
-          (item.addonLabel ? "\n   Add-on: " + item.addonLabel : "") +
+          (breakdownLines.length ? "\n   " + breakdownLines.join("\n   ") : "") +
           "\n   " + meta + "\n   Subtotal: " + priceTxt;
       }).join("\n");
 
@@ -1976,6 +2036,8 @@
       var requests = document.getElementById("requests").value || "None";
 
       var message = "Hi ITC, I would like to check availability and price.\n\n" +
+        "*Lead guest name:* " + leadName + "\n" +
+        "*Phone / WhatsApp:* " + leadPhone + "\n\n" +
         "*Tours:*\n" + lines + "\n\n" +
         "*Estimated total:* " + formatTHB(grandTotal) + (hasOnRequest ? " (plus item(s) priced on request)" : "") + "\n" +
         "*Hotel name:* " + hotel + "\n" +
