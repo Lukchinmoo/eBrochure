@@ -149,8 +149,8 @@
     }
 
     .section-tight {
-      padding-top: 27px;
-      padding-bottom: 27px;
+      padding-top: 3px;
+      padding-bottom: 3px;
     }
 
     .inner {
@@ -478,10 +478,96 @@
       padding: 8px 12px;
       border-radius: 6px;
       cursor: pointer;
+      transition: background .15s;
+    }
+
+    .card-book-btn.added {
+      background: #1a9668;
+      color: var(--white);
     }
 
     .tour-card {
       cursor: pointer;
+    }
+
+    .cart-list {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-remove {
+      flex: none;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
+    .cart-empty {
+      margin: 0;
+      padding: 14px;
+      font-size: 14px;
+      color: var(--muted);
+      background: var(--white);
+    }
+
+    .cart-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      background: var(--sun);
+      color: #14213d;
+      font-weight: 850;
+      font-size: 13px;
+      padding: 12px 15px;
+      border-radius: 999px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, .28);
+      cursor: pointer;
+    }
+
+    .cart-fab img {
+      width: 17px;
+      height: auto;
+      display: block;
+    }
+
+    .cart-badge {
+      background: var(--coral);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 850;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
     }
 
     .modal-overlay {
@@ -1000,15 +1086,17 @@
       <div class="inner">
         <div class="section-head">
           <h2>Ready to reserve?</h2>
-          <p class="section-note">Tell us your preferred tour, travel date, hotel, and group size. We will confirm availability and the final price before booking.</p>
+          <p class="section-note">Add tours to your cart, then tell us your travel date, hotel, and group size. We will confirm availability and the final price before booking.</p>
         </div>
         <form class="booking-form" id="booking-form">
           <div class="form-row">
-            <label for="pref-tour">Preferred tour</label>
-            <input type="text" id="pref-tour" name="tour" readonly placeholder="Tap “Book on WhatsApp” on any tour above">
+            <label>Selected tours</label>
+            <div class="cart-list" id="cart-list">
+              <p class="cart-empty" id="cart-empty">No tours added yet — tap "Add to cart" on any tour above.</p>
+            </div>
           </div>
           <div class="form-row">
-            <label for="pref-option">Option</label>
+            <label for="pref-option">Option / notes</label>
             <input type="text" id="pref-option" name="option" placeholder="e.g. Speedboat, VIP seat, Half day">
           </div>
           <div class="form-grid">
@@ -1042,6 +1130,10 @@
       </div>
     </section>
   </main>
+
+  <button type="button" id="cart-fab" class="cart-fab" aria-label="View cart and book">
+    <img src="assets/cart-icon.png" alt="">Cart<span class="cart-badge" id="cart-badge" style="display:none;">0</span>
+  </button>
 
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal-sheet" id="modal-sheet">
@@ -1089,7 +1181,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn" id="modal-book">Book on WhatsApp</button>
+        <button type="button" class="btn" id="modal-book">Add to cart</button>
       </div>
     </div>
   </div>
@@ -1392,7 +1484,7 @@
           '<p>' + t.desc + '</p>' +
           '<div class="price"><small>' + priceLabel + '</small> ' + priceValue + '</div>' +
           optionsHtml +
-          '<div class="card-actions"><span class="view-details">View details &rarr;</span><button type="button" class="card-book-btn" data-book-id="' + t.id + '">Book on WhatsApp</button></div>' +
+          '<div class="card-actions"><span class="view-details">View details &rarr;</span><button type="button" class="card-book-btn" data-book-id="' + t.id + '">Add to cart</button></div>' +
         '</div>' +
       '</article>';
     }
@@ -1403,14 +1495,48 @@
     var tabs = document.querySelectorAll(".cat-tab");
     var cards = document.querySelectorAll(".tour-card");
 
-    function bookTour(tour) {
-      document.getElementById("pref-tour").value = tour.title;
-      closeModal();
-      document.getElementById("book").scrollIntoView({ behavior: "smooth" });
-      setTimeout(function () {
-        document.getElementById("travel-date").focus();
-      }, 500);
+    var cart = [];
+
+    function renderCart() {
+      var listEl = document.getElementById("cart-list");
+      var badge = document.getElementById("cart-badge");
+      if (cart.length === 0) {
+        listEl.innerHTML = '<p class="cart-empty" id="cart-empty">No tours added yet — tap "Add to cart" on any tour above.</p>';
+      } else {
+        listEl.innerHTML = cart.map(function (id) {
+          var t = tours.find(function (x) { return x.id === id; });
+          var name = t ? t.title : id;
+          return '<div class="cart-item"><span>' + name + '</span><button type="button" class="cart-remove" data-remove-id="' + id + '" aria-label="Remove">&times;</button></div>';
+        }).join("");
+      }
+      badge.textContent = cart.length;
+      badge.style.display = cart.length ? "" : "none";
     }
+
+    function addToCart(tour) {
+      if (cart.indexOf(tour.id) === -1) {
+        cart.push(tour.id);
+        renderCart();
+      }
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(function (x) { return x !== id; });
+      renderCart();
+    }
+
+    function goToCart() {
+      document.getElementById("book").scrollIntoView({ behavior: "smooth" });
+    }
+
+    document.getElementById("cart-list").addEventListener("click", function (e) {
+      var btn = e.target.closest(".cart-remove");
+      if (btn) removeFromCart(btn.getAttribute("data-remove-id"));
+    });
+
+    document.getElementById("cart-fab").addEventListener("click", goToCart);
+
+    renderCart();
 
     tabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
@@ -1496,7 +1622,16 @@
       if (bookBtn) {
         e.stopPropagation();
         var bookTourData = tours.find(function (t) { return t.id === bookBtn.getAttribute("data-book-id"); });
-        if (bookTourData) bookTour(bookTourData);
+        if (bookTourData) {
+          addToCart(bookTourData);
+          var originalLabel = bookBtn.textContent;
+          bookBtn.textContent = "Added \u2713";
+          bookBtn.classList.add("added");
+          setTimeout(function () {
+            bookBtn.textContent = originalLabel;
+            bookBtn.classList.remove("added");
+          }, 1200);
+        }
         return;
       }
       var card = e.target.closest(".tour-card");
@@ -1512,11 +1647,19 @@
 
     modalBook.addEventListener("click", function () {
       if (!currentTour) return;
-      bookTour(currentTour);
+      addToCart(currentTour);
+      closeModal();
+      goToCart();
     });
 
     document.getElementById("send-whatsapp").addEventListener("click", function () {
-      var tour = document.getElementById("pref-tour").value || "Not selected yet";
+      var tourNames = cart.map(function (id) {
+        var t = tours.find(function (x) { return x.id === id; });
+        return t ? t.title : id;
+      });
+      var tourList = tourNames.length
+        ? tourNames.map(function (n, i) { return (i + 1) + ". " + n; }).join("\n")
+        : "Not selected yet";
       var option = document.getElementById("pref-option").value || "Not specified";
       var date = document.getElementById("travel-date").value || "Not specified";
       var hotel = document.getElementById("hotel-name").value || "Not specified";
@@ -1525,7 +1668,7 @@
       var requests = document.getElementById("requests").value || "None";
 
       var message = "Hi ITC, I would like to check availability and price.\n\n" +
-        "*Preferred tour:* " + tour + "\n" +
+        "*Tours:*\n" + tourList + "\n\n" +
         "*Option:* " + option + "\n" +
         "*Travel date:* " + date + "\n" +
         "*Hotel name:* " + hotel + "\n" +
