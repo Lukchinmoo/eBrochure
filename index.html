@@ -750,16 +750,73 @@
       background: #eaf1fb;
     }
 
-    .modal-addon-box .form-row:last-child {
-      margin-top: 12px;
-    }
-
     .modal-addon-box.is-hidden {
       display: none;
     }
 
-    #modal-addon-van-row.is-hidden {
+    .addon-box-label {
+      margin: 0 0 10px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .modal-addon-box select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    .addon-check-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 15px;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .addon-check-row input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--sea);
+      cursor: pointer;
+      flex: none;
+    }
+
+    .addon-van-inline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 2px 0 10px 27px;
+    }
+
+    .addon-van-inline.is-hidden {
       display: none;
+    }
+
+    .addon-van-inline label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .addon-van-inline input {
+      width: 76px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 7px 8px;
+      font-size: 14px;
+      font-family: inherit;
     }
 
     .booking-form {
@@ -1184,7 +1241,7 @@
         <div class="panel light">
           <h3>Before booking</h3>
           <ul>
-            <li>Share guest names, ages, hotel, travel date, and preferred tour.</li>
+            <li>Share guest names, contact no., hotel name, and food / transfer requests.</li>
             <li>Ask us to check vegetarian, Jain, Indian meal, or private transfer requests.</li>
             <li>National park fees and some add-ons may be excluded depending on the tour.</li>
             <li>Weather and sea conditions may affect island trips.</li>
@@ -1275,18 +1332,7 @@
           </div>
         </div>
 
-        <div class="modal-addon-box is-hidden" id="modal-addon-box">
-          <div class="form-row">
-            <label for="modal-addon">Add-on</label>
-            <select id="modal-addon">
-              <option value="-1">None</option>
-            </select>
-          </div>
-          <div class="form-row is-hidden" id="modal-addon-van-row">
-            <label for="modal-addon-vans">Number of van(s)</label>
-            <input type="number" id="modal-addon-vans" min="1" value="1">
-          </div>
-        </div>
+        <div class="modal-addon-box is-hidden" id="modal-addon-box"></div>
 
         <p class="modal-section-title">Full price list</p>
         <p class="price-legend"><span>Rate per option</span><span>Adult / Child, THB</span></p>
@@ -1484,6 +1530,7 @@
           { label: "Swim with dolphins", adult: "5,780", child: "5,780" },
           { label: "Private roundtrip transfer (per van)", adult: "1,370", perVan: true }
         ],
+        multiAddon: true,
         highlights: ["Photo opportunities or swimming with dolphins may be available at extra charge.","Good for families with children or guests who want a lighter activity.","Comfortable indoor seating with multiple showtimes."] },
 
       { id: "tiger", cat: "outdoor", tag: "", img: "assets/tiger.jpg",
@@ -1564,6 +1611,7 @@
           { label: "Roundtrip transfer (shared)", adult: "370", child: "370" },
           { label: "Gold seat upgrade", adult: "270", child: "270" }
         ],
+        multiAddon: true,
         highlights: ["Gold seat upgrade and shared transfer are available.","Good for families and guests who want a complete evening program.","Festival village with shopping, games, and cultural activities."] },
 
       { id: "carnival", cat: "evening", tag: "", img: "assets/carnival.jpg",
@@ -1578,6 +1626,7 @@
           { label: "Royal seat + tram upgrade", adult: "370", child: "370" },
           { label: "Roundtrip transfer (shared)", adult: "370", child: "370" }
         ],
+        multiAddon: true,
         highlights: ["Royal seat, tram upgrade, and shared transfer can be added.","Strong choice for families, groups, and guests who enjoy large visual productions.","Nighttime parade with illuminated floats and performances."] },
 
       { id: "siamniramit", cat: "evening", tag: "", img: "assets/siamniramit.jpg",
@@ -1592,6 +1641,7 @@
           { label: "Add buffet dinner", adult: "250", child: "150" },
           { label: "Roundtrip transfer (shared)", adult: "270", child: "270" }
         ],
+        multiAddon: true,
         highlights: ["Grand theatrical show with over 100 performers, dazzling costumes, and special effects.","Three-act performance showcasing Thai history, spiritual beliefs, and festivals.","Authentic Thai Village with crafts, dances, and cultural demonstrations."] },
 
       { id: "circus", cat: "evening", tag: "", img: "assets/circus.jpg",
@@ -1713,7 +1763,9 @@
           '<div class="cart-item-info">' +
             '<div class="cart-item-title">' + item.title + (item.optionLabel ? " — " + item.optionLabel : "") + '</div>' +
             (item.optionBreakdown ? '<div class="cart-item-breakdown">Option: ' + item.optionBreakdown + '</div>' : '') +
-            (item.addonName ? '<div class="cart-item-breakdown">Add-on (' + item.addonName + '): ' + (item.addonBreakdown || "On request") + '</div>' : '') +
+            (item.addons && item.addons.length ? item.addons.map(function (a) {
+              return '<div class="cart-item-breakdown">Add-on (' + a.name + '): ' + (a.breakdown || "On request") + '</div>';
+            }).join("") : "") +
             '<div class="cart-item-meta">' + metaParts.join(" · ") + '</div>' +
             '<div class="cart-item-subtotal">' + subtotalTxt + '</div>' +
           '</div>' +
@@ -1785,60 +1837,107 @@
       }
     }
 
+    function addonPriceLabel(a) {
+      var adultPrice = parsePrice(a.adult);
+      if (isNaN(adultPrice)) return "";
+      if (a.perVan) return " (" + formatTHB(adultPrice) + " / van)";
+      var childPrice = parsePrice(a.child);
+      return " (" + formatTHB(adultPrice) + (!isNaN(childPrice) && childPrice !== adultPrice ? " adult / " + formatTHB(childPrice) + " child" : "") + ")";
+    }
+
     function populateModalAddons(tour) {
       var box = document.getElementById("modal-addon-box");
-      var sel = document.getElementById("modal-addon");
-      var vanRow = document.getElementById("modal-addon-van-row");
 
       if (!tour.addons || !tour.addons.length) {
         box.classList.add("is-hidden");
-        sel.innerHTML = '<option value="-1">None</option>';
-        vanRow.classList.add("is-hidden");
+        box.innerHTML = "";
         return;
       }
 
       box.classList.remove("is-hidden");
-      var opts = ['<option value="-1">None</option>'];
-      tour.addons.forEach(function (a, i) {
-        var adultPrice = parsePrice(a.adult);
-        var priceTxt = isNaN(adultPrice) ? "" : (a.perVan
-          ? " (" + formatTHB(adultPrice) + " / van)"
-          : (" (" + formatTHB(adultPrice) + (a.child && parsePrice(a.child) !== adultPrice ? " adult / " + formatTHB(parsePrice(a.child)) + " child" : "") + ")"));
-        opts.push('<option value="' + i + '">' + a.label + priceTxt + '</option>');
-      });
-      sel.innerHTML = opts.join("");
-      document.getElementById("modal-addon-vans").value = 1;
-      vanRow.classList.add("is-hidden");
-    }
 
-    function currentModalAddon(tour) {
-      var sel = document.getElementById("modal-addon");
-      var idx = parseInt(sel.value, 10);
-      if (idx < 0 || !tour.addons) return null;
-      return tour.addons[idx] || null;
-    }
-
-    function getAddonAmount(tour, adults, children) {
-      var addon = currentModalAddon(tour);
-      if (!addon) return { addon: null, amount: 0 };
-      var adultPrice = parsePrice(addon.adult);
-      if (isNaN(adultPrice)) return { addon: addon, amount: 0 };
-      if (addon.perVan) {
-        var vans = parseInt(document.getElementById("modal-addon-vans").value, 10) || 1;
-        return { addon: addon, amount: adultPrice * vans, vans: vans };
+      if (tour.multiAddon) {
+        var rowsHtml = tour.addons.map(function (a, i) {
+          var vanRow = a.perVan
+            ? '<div class="addon-van-inline is-hidden" data-van-for="' + i + '"><label>Number of van(s)</label><input type="number" class="addon-van-input" data-van-input-for="' + i + '" min="1" value="1"></div>'
+            : "";
+          return '<label class="addon-check-row"><input type="checkbox" class="addon-checkbox" value="' + i + '"><span>' + a.label + addonPriceLabel(a) + '</span></label>' + vanRow;
+        }).join("");
+        box.innerHTML = '<p class="addon-box-label">Add-on (select any that apply)</p>' + rowsHtml;
+      } else {
+        var opts = ['<option value="-1">None</option>'];
+        tour.addons.forEach(function (a, i) {
+          opts.push('<option value="' + i + '">' + a.label + addonPriceLabel(a) + '</option>');
+        });
+        box.innerHTML = '<p class="addon-box-label">Add-on</p>' +
+          '<select id="modal-addon">' + opts.join("") + '</select>' +
+          '<div class="addon-van-inline is-hidden" id="modal-addon-van-row"><label>Number of van(s)</label><input type="number" id="modal-addon-vans" min="1" value="1"></div>';
       }
-      var childPrice = parsePrice(addon.child);
-      if (isNaN(childPrice)) childPrice = adultPrice;
-      return { addon: addon, amount: adults * adultPrice + children * childPrice };
     }
 
-    document.getElementById("modal-addon").addEventListener("change", function () {
-      var vanRow = document.getElementById("modal-addon-van-row");
-      var addon = currentTour ? currentModalAddon(currentTour) : null;
-      vanRow.classList.toggle("is-hidden", !(addon && addon.perVan));
-      updateModalSubtotal();
+    function getSelectedAddons(tour) {
+      var box = document.getElementById("modal-addon-box");
+      if (!tour.addons || !tour.addons.length) return [];
+
+      if (tour.multiAddon) {
+        var result = [];
+        box.querySelectorAll(".addon-checkbox:checked").forEach(function (cb) {
+          var idx = parseInt(cb.value, 10);
+          var addon = tour.addons[idx];
+          if (!addon) return;
+          var vans = null;
+          if (addon.perVan) {
+            var vanInput = box.querySelector('.addon-van-input[data-van-input-for="' + idx + '"]');
+            vans = vanInput ? (parseInt(vanInput.value, 10) || 1) : 1;
+          }
+          result.push({ addon: addon, vans: vans });
+        });
+        return result;
+      }
+
+      var sel = box.querySelector("#modal-addon");
+      if (!sel) return [];
+      var idx = parseInt(sel.value, 10);
+      if (idx < 0) return [];
+      var addon = tour.addons[idx];
+      if (!addon) return [];
+      var vans = null;
+      if (addon.perVan) {
+        var vanInput = box.querySelector("#modal-addon-vans");
+        vans = vanInput ? (parseInt(vanInput.value, 10) || 1) : 1;
+      }
+      return [{ addon: addon, vans: vans }];
+    }
+
+    function computeAddonAmount(sel, adults, children) {
+      var adultPrice = parsePrice(sel.addon.adult);
+      if (isNaN(adultPrice)) return { amount: 0, breakdown: "" };
+      if (sel.addon.perVan) {
+        var vans = sel.vans || 1;
+        return { amount: adultPrice * vans, breakdown: vanBreakdownText(adultPrice, vans) };
+      }
+      var childPrice = parsePrice(sel.addon.child);
+      if (isNaN(childPrice)) childPrice = adultPrice;
+      return { amount: adults * adultPrice + children * childPrice, breakdown: breakdownText(adultPrice, childPrice, adults, children) };
+    }
+
+    document.getElementById("modal-addon-box").addEventListener("change", function (e) {
+      if (e.target.classList.contains("addon-checkbox")) {
+        var box = document.getElementById("modal-addon-box");
+        var vanInline = box.querySelector('[data-van-for="' + e.target.value + '"]');
+        if (vanInline) vanInline.classList.toggle("is-hidden", !e.target.checked);
+        updateModalSubtotal();
+      } else if (e.target.id === "modal-addon") {
+        var vanRow = document.getElementById("modal-addon-van-row");
+        var selections = currentTour ? getSelectedAddons(currentTour) : [];
+        var addon = selections[0] ? selections[0].addon : null;
+        if (vanRow) vanRow.classList.toggle("is-hidden", !(addon && addon.perVan));
+        updateModalSubtotal();
+      }
     });
-    document.getElementById("modal-addon-vans").addEventListener("input", updateModalSubtotal);
+    document.getElementById("modal-addon-box").addEventListener("input", function (e) {
+      if (e.target.classList.contains("addon-van-input") || e.target.id === "modal-addon-vans") updateModalSubtotal();
+    });
 
     function populateModalOptions(tour) {
       var sel = document.getElementById("modal-option");
@@ -1872,15 +1971,20 @@
       var adults = parseInt(document.getElementById("modal-adults").value, 10) || 0;
       var children = parseInt(document.getElementById("modal-children").value, 10) || 0;
       var out = document.getElementById("modal-subtotal");
-      var addonInfo = currentTour ? getAddonAmount(currentTour, adults, children) : { amount: 0 };
+      var addonAmount = 0;
+      if (currentTour) {
+        getSelectedAddons(currentTour).forEach(function (sel) {
+          addonAmount += computeAddonAmount(sel, adults, children).amount;
+        });
+      }
       var adultPrice = opt ? parsePrice(opt.adult) : NaN;
       if (isNaN(adultPrice)) {
-        out.textContent = addonInfo.amount ? ("Price on request + " + formatTHB(addonInfo.amount)) : "Price on request";
+        out.textContent = addonAmount ? ("Price on request + " + formatTHB(addonAmount)) : "Price on request";
         return;
       }
       var childPrice = parsePrice(opt.child);
       if (isNaN(childPrice)) childPrice = adultPrice;
-      var total = adults * adultPrice + children * childPrice + (addonInfo.amount || 0);
+      var total = adults * adultPrice + children * childPrice + addonAmount;
       out.textContent = formatTHB(total);
     }
 
@@ -1965,7 +2069,14 @@
       var adults = parseInt(document.getElementById("modal-adults").value, 10) || 1;
       var children = parseInt(document.getElementById("modal-children").value, 10) || 0;
       var date = document.getElementById("modal-date").value;
-      var addonInfo = getAddonAmount(currentTour, adults, children);
+
+      var addonSelections = getSelectedAddons(currentTour);
+      var addonTotal = 0;
+      var addons = addonSelections.map(function (sel) {
+        var r = computeAddonAmount(sel, adults, children);
+        addonTotal += r.amount;
+        return { name: sel.addon.label, breakdown: r.breakdown };
+      });
 
       var subtotal = null;
       var optionBreakdown = "";
@@ -1974,23 +2085,7 @@
         var childPrice = parsePrice(opt.child);
         if (isNaN(childPrice)) childPrice = adultPrice;
         optionBreakdown = breakdownText(adultPrice, childPrice, adults, children);
-        subtotal = adults * adultPrice + children * childPrice + (addonInfo.amount || 0);
-      }
-
-      var addonName = "";
-      var addonBreakdown = "";
-      if (addonInfo.addon) {
-        addonName = addonInfo.addon.label;
-        var addonAdultPrice = parsePrice(addonInfo.addon.adult);
-        if (!isNaN(addonAdultPrice)) {
-          if (addonInfo.addon.perVan) {
-            addonBreakdown = vanBreakdownText(addonAdultPrice, addonInfo.vans || 1);
-          } else {
-            var addonChildPrice = parsePrice(addonInfo.addon.child);
-            if (isNaN(addonChildPrice)) addonChildPrice = addonAdultPrice;
-            addonBreakdown = breakdownText(addonAdultPrice, addonChildPrice, adults, children);
-          }
-        }
+        subtotal = adults * adultPrice + children * childPrice + addonTotal;
       }
 
       addToCart({
@@ -1998,8 +2093,7 @@
         title: currentTour.title,
         optionLabel: opt ? opt.label : "",
         optionBreakdown: optionBreakdown,
-        addonName: addonName,
-        addonBreakdown: addonBreakdown,
+        addons: addons,
         date: date,
         adults: adults,
         children: children,
@@ -2028,7 +2122,11 @@
         var priceTxt = item.subtotal === null ? "Price on request" : formatTHB(item.subtotal);
         var breakdownLines = [];
         if (item.optionBreakdown) breakdownLines.push("Option: " + item.optionBreakdown);
-        if (item.addonName) breakdownLines.push("Add-on (" + item.addonName + "): " + (item.addonBreakdown || "On request"));
+        if (item.addons && item.addons.length) {
+          item.addons.forEach(function (a) {
+            breakdownLines.push("Add-on (" + a.name + "): " + (a.breakdown || "On request"));
+          });
+        }
         return (i + 1) + ". " + item.title + (item.optionLabel ? " (" + item.optionLabel + ")" : "") +
           (breakdownLines.length ? "\n   " + breakdownLines.join("\n   ") : "") +
           "\n   " + meta + "\n   Subtotal: " + priceTxt;
