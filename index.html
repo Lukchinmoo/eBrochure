@@ -936,6 +936,12 @@
       display: none;
     }
 
+    .form-row input:disabled {
+      background: var(--mint);
+      color: #7a8a80;
+      cursor: not-allowed;
+    }
+
     .form-row input,
     .form-row textarea {
       width: 100%;
@@ -1412,10 +1418,12 @@
             <div class="form-row">
               <label for="modal-adults">Adults</label>
               <input type="number" id="modal-adults" min="1" value="2">
+              <p class="modal-date-hint is-hidden" id="modal-adults-hint"></p>
             </div>
             <div class="form-row">
               <label for="modal-children">Children</label>
               <input type="number" id="modal-children" min="0" value="0">
+              <p class="modal-date-hint is-hidden" id="modal-children-hint">Adults only for this experience</p>
             </div>
           </div>
           <div class="modal-subtotal-row">
@@ -1519,7 +1527,6 @@
         title: "A Canoeing Journey in Phang Nga Bay", price: "from THB 1,700",
         desc: "This tour is the ultimate combination of adventure, nature, and iconic sights, a must-do experience in Phang Nga Bay!",
         options: [
-          ["Longtail Boat","1,700","1,500"],
           ["Big Boat","1,700","1,500"],
           ["Speedboat","1,900","1,700"]
         ],
@@ -1598,12 +1605,15 @@
         desc: "A nature-focused island trip with healthy reefs, clear shallow snorkeling, and a quiet atmosphere.",
         options: [["Speedboat, 15 Oct - 15 May","3,250","2,600"]],
         itinerary: ["07:00 Pick up from your Phuket hotel lobby / Khaolak hotel, arrive at Tablamu Pier","07:30 Check-in at the pier and enjoy a light breakfast (sandwich, fresh fruit juice, tea, and coffee)","07:45 Meet your nature tour guide and get a program briefing, including coral-friendly tour details and safety instructions on board","08:00 Depart for Surin Islands by speedboat","10:00 Arrive at Surin Islands: snorkeling paradise at The Nemo / Pineapple Gulf, or relax at the scenic Twin Beach","11:00 Depart to the Sea Gypsy Moken Village to explore the traditional lifestyle of people living in the sea (entrance may be adjusted according to the national park)","11:45 Buffet lunch on the beach at Mu Koh Surin National Park with fresh tropical fruits and drinks","13:00 Snorkeling at Mae Yai Gulf and The Tao Gulf among beautiful coral reefs","15:00 Depart back from Surin Islands to the private pier","17:30 Van transfer back to your hotel"],
+        included: ["Friendly English speaking guide with ecotourism mind","Light breakfast, Lunch, Bakery, Soft drink, fruit, snack","Snorkeling equipments (Mask, Snorkel, and Life Jacket)","National park fee"],
+        excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
+        bring: ["Sunglasses","Sun hat","Swimwear","Towel","Sunscreen","Cash"],
         notes: ["Toddler refers to children aged 1-3 years old (free of charge for diving trips)","Children mean 4-11 years old (not over 120 cm tall)","Adult means 12 years old and over","Pickup and drop-off in Phuket carries an additional charge of 300 baht per person","Meals are subject to change according to park policies","Season: open mid-October to mid-May (closed during monsoon season)","Not recommended for pregnant travelers or guests with severe back conditions"] },
 
       { id: "citytour", cat: "day", tag: "", img: "assets/city-tour.png",
-        title: "Phuket City Tour", price: "On request",
+        title: "Phuket City Tour", price: "THB 3,100",
         desc: "Big Buddha, Wat Chalong, Old Town, Kata - Karon Viewpoint, local shopping, and island culture.",
-        options: [],
+        options: [["Private vehicle, 5 hours","3,100","3,100"]],
         itinerary: ["This standard 5 hours sightseeing itinerary covers the following stops:","Kata-Karon Viewpoint: scenic view of the beaches","Big Buddha Viewpoint: begin with panoramic views of the island from the base of the majestic 45-metre-tall statue","Wat Chalong Temple: explore Phuket's largest and most highly revered Buddhist temple","Cashew Nut Factory: learn about local cashew harvesting and sample various flavors","Honey Farm: observe bees up close and discover the local honey production process","Phuket Old Town: stroll through the colorful streets lined with historic Sino-Portuguese architecture and local shops"],
         included: ["Private vehicle and driver","Free hotel pickup from listed zones (Kamala, Patong, Kathu, Kata, Karon, or Chalong)"],
         excluded: ["Personal expenses such as drinks, tips, etc.","Other services not mentioned in the program"],
@@ -1696,11 +1706,16 @@
         ],
         highlights: ["Good for families, teenagers, and guests who want a full leisure day.","Works well when weather or sea conditions make island trips less appealing.","Dining areas and cabana options available."] },
 
-      { id: "spa", cat: "spa", tag: "", img: "assets/spa.jpg",
-        title: "Spa & Massage", price: "On request",
-        desc: "A relaxation option after sightseeing, island tours, shopping days, or long travel.",
-        options: [],
-        highlights: ["Options may include Thai massage, aromatherapy, foot massage, body scrub, and spa packages.","Good for couples, seniors, and guests who want a calm half-day activity.","Ask us to match location, treatment style, budget, and transfer needs."] },
+      { id: "spa", cat: "spa", tag: "", img: "assets/spa.jpg", noChildren: true,
+        title: "Orientala Spa, Patong Phuket", price: "from THB 1,100",
+        desc: "A relaxing spa retreat in Patong offering massage, body treatments, and packages for couples.",
+        options: [
+          ["Back and Shoulder Massage, 60 mins","1,100","N/A"],
+          ["Spa Blissful, 150 mins","2,000","N/A"],
+          ["Sweet Lover (2 pax package), 150 mins","4,000","N/A", { pax: 2 }]
+        ],
+        notes: ["Spa Blissful includes: Thai massage, Aroma massage, Body Scrub","Sweet Lover includes: Body Scrub, Milk Bath, Aroma Massage — price shown is per package for 2 persons, not per person","All other prices are per person"],
+        highlights: ["Good for couples, seniors, and guests who want a calm half-day activity.","Ask us to match transfer needs and preferred timing."] },
 
       { id: "simon", cat: "evening", tag: "", img: "assets/simon.jpg",
         title: "Simon Cabaret", price: "from THB 580",
@@ -1812,13 +1827,13 @@
         var flat = [];
         tour.fullOptions.forEach(function (grp) {
           grp.rows.forEach(function (o) {
-            flat.push({ label: grp.group + " — " + o[0], adult: o[1], child: o[2] });
+            flat.push({ label: grp.group + " — " + o[0], adult: o[1], child: o[2], fixedPackage: o[3] || null });
           });
         });
         return flat;
       }
       return (tour.options || []).map(function (o) {
-        return { label: o[0], adult: o[1], child: o[2] };
+        return { label: o[0], adult: o[1], child: o[2], fixedPackage: o[3] || null };
       });
     }
 
@@ -2134,7 +2149,16 @@
         }
       }
       document.getElementById("modal-adults").value = 2;
-      document.getElementById("modal-children").value = 0;
+      var childrenInput = document.getElementById("modal-children");
+      var childrenHint = document.getElementById("modal-children-hint");
+      childrenInput.value = 0;
+      if (tour.noChildren) {
+        childrenInput.disabled = true;
+        if (childrenHint) childrenHint.classList.remove("is-hidden");
+      } else {
+        childrenInput.disabled = false;
+        if (childrenHint) childrenHint.classList.add("is-hidden");
+      }
     }
 
     function currentModalOption() {
@@ -2145,10 +2169,21 @@
       return opts[idx] || null;
     }
 
+    function computeOptionAmount(opt, adults, children) {
+      var adultPrice = opt ? parsePrice(opt.adult) : NaN;
+      if (isNaN(adultPrice)) return { amount: null, isFixed: false };
+      if (opt.fixedPackage) {
+        return { amount: adultPrice, isFixed: true };
+      }
+      var childPrice = parsePrice(opt.child);
+      if (isNaN(childPrice)) childPrice = adultPrice;
+      return { amount: adults * adultPrice + children * childPrice, isFixed: false };
+    }
+
     function updateModalSubtotal() {
       var opt = currentModalOption();
       var adults = parseInt(document.getElementById("modal-adults").value, 10) || 0;
-      var children = parseInt(document.getElementById("modal-children").value, 10) || 0;
+      var children = (currentTour && currentTour.noChildren) ? 0 : (parseInt(document.getElementById("modal-children").value, 10) || 0);
       var out = document.getElementById("modal-subtotal");
       var addonAmount = 0;
       if (currentTour) {
@@ -2156,15 +2191,12 @@
           addonAmount += computeAddonAmount(sel, adults, children).amount;
         });
       }
-      var adultPrice = opt ? parsePrice(opt.adult) : NaN;
-      if (isNaN(adultPrice)) {
+      var optResult = computeOptionAmount(opt, adults, children);
+      if (optResult.amount === null) {
         out.textContent = addonAmount ? ("Price on request + " + formatTHB(addonAmount)) : "Price on request";
         return;
       }
-      var childPrice = parsePrice(opt.child);
-      if (isNaN(childPrice)) childPrice = adultPrice;
-      var total = adults * adultPrice + children * childPrice + addonAmount;
-      out.textContent = formatTHB(total);
+      out.textContent = formatTHB(optResult.amount + addonAmount);
     }
 
     function openModal(tour) {
@@ -2174,6 +2206,7 @@
       modalDesc.textContent = tour.desc;
       populateModalOptions(tour);
       populateModalAddons(tour);
+      syncAdultsForOption();
       updateModalSubtotal();
 
       if (tour.itineraryGroups) {
@@ -2238,7 +2271,27 @@
       if (e.target === overlay) closeModal();
     });
 
-    document.getElementById("modal-option").addEventListener("change", updateModalSubtotal);
+    function syncAdultsForOption() {
+      var opt = currentModalOption();
+      var adultsInput = document.getElementById("modal-adults");
+      var adultsHint = document.getElementById("modal-adults-hint");
+      if (opt && opt.fixedPackage) {
+        adultsInput.value = opt.fixedPackage.pax || 2;
+        adultsInput.disabled = true;
+        if (adultsHint) {
+          adultsHint.textContent = "Fixed package for " + (opt.fixedPackage.pax || 2) + " pax";
+          adultsHint.classList.remove("is-hidden");
+        }
+      } else {
+        adultsInput.disabled = false;
+        if (adultsHint) adultsHint.classList.add("is-hidden");
+      }
+    }
+
+    document.getElementById("modal-option").addEventListener("change", function () {
+      syncAdultsForOption();
+      updateModalSubtotal();
+    });
     document.getElementById("modal-adults").addEventListener("input", updateModalSubtotal);
     document.getElementById("modal-children").addEventListener("input", updateModalSubtotal);
 
@@ -2258,7 +2311,7 @@
       }
       var opt = currentModalOption();
       var adults = parseInt(document.getElementById("modal-adults").value, 10) || 1;
-      var children = parseInt(document.getElementById("modal-children").value, 10) || 0;
+      var children = currentTour.noChildren ? 0 : (parseInt(document.getElementById("modal-children").value, 10) || 0);
 
       var addonSelections = getSelectedAddons(currentTour);
       var addonTotal = 0;
@@ -2270,13 +2323,17 @@
 
       var subtotal = null;
       var optionBreakdown = "";
-      var optionAmount = null;
-      var adultPrice = opt ? parsePrice(opt.adult) : NaN;
-      if (!isNaN(adultPrice)) {
-        var childPrice = parsePrice(opt.child);
-        if (isNaN(childPrice)) childPrice = adultPrice;
-        optionBreakdown = breakdownText(adultPrice, childPrice, adults, children);
-        optionAmount = adults * adultPrice + children * childPrice;
+      var optResult = computeOptionAmount(opt, adults, children);
+      var optionAmount = optResult.amount;
+      if (optionAmount !== null) {
+        if (optResult.isFixed) {
+          optionBreakdown = "Fixed package price (" + (opt.fixedPackage.pax || 2) + " pax)";
+        } else {
+          var adultPrice = parsePrice(opt.adult);
+          var childPrice = parsePrice(opt.child);
+          if (isNaN(childPrice)) childPrice = adultPrice;
+          optionBreakdown = breakdownText(adultPrice, childPrice, adults, children);
+        }
         subtotal = optionAmount + addonTotal;
       }
 
